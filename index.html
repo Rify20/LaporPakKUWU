@@ -1,722 +1,827 @@
 <!DOCTYPE html>
+<html class="light" lang="id">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Registrasi Warga Baru LPK - Lapor Pak Kuwu</title>
 
-<html class="light" lang="en"><head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Lapor Pak Kuwu - Admin Analytics Dashboard</title>
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<script id="tailwind-config">
-        tailwind.config = {
-            darkMode: "class",
-            theme: {
-                extend: {
-                    colors: {
-                        "primary": "#137fec",
-                        "background-light": "#f6f7f8",
-                        "background-dark": "#101922",
-                    },
-                    fontFamily: {
-                        "display": ["Public Sans", "sans-serif"]
-                    },
-                    borderRadius: {
-                        "DEFAULT": "0.25rem",
-                        "lg": "0.5rem",
-                        "xl": "0.75rem",
-                        "full": "9999px"
-                    },
-                },
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700;800;900&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              primary: "#137fec",
+              "background-light": "#f6f7f8",
+              "background-dark": "#101922",
             },
-        }
+            fontFamily: {
+              display: ["Public Sans", "sans-serif"],
+            },
+            borderRadius: {
+              DEFAULT: "0.25rem",
+              lg: "0.5rem",
+              xl: "0.75rem",
+              full: "9999px",
+            },
+          },
+        },
+      };
     </script>
-<style>
-        body {
-            font-family: 'Public Sans', sans-serif;
+
+    <style>
+      body {
+        font-family: "Public Sans", sans-serif;
+      }
+      .form-input-focus:focus {
+        border-color: #137fec;
+        ring: 2px;
+        ring-color: rgba(19, 127, 236, 0.2);
+      }
+      .custom-select-icon {
+        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+        background-position: right 0.5rem center;
+        background-repeat: no-repeat;
+        background-size: 1.5em 1.5em;
+        padding-right: 2.5rem;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+      }
+
+      /* Tiny motion – tidak mengubah layout/desain */
+      @media (prefers-reduced-motion: no-preference) {
+        .modal-enter {
+          animation: modalIn 160ms ease-out;
         }
+        @keyframes modalIn {
+          from {
+            opacity: 0;
+            transform: translateY(8px) scale(0.99);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+          }
+        }
+      }
     </style>
-</head>
-<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 transition-colors duration-200">
-<div class="flex h-screen overflow-hidden">
-<!-- Sidebar Navigation -->
-<aside class="w-72 bg-white dark:bg-slate-900 border-r border-slate-200 dark:border-slate-800 flex flex-col h-full shrink-0">
-<div class="p-6 flex items-center gap-3">
-<div class="bg-primary size-10 rounded-lg flex items-center justify-center text-white">
-<span class="material-symbols-outlined">campaign</span>
-</div>
-<div>
-<h1 class="text-lg font-bold leading-none">Lapor Pak Kuwu</h1>
-<p class="text-xs text-slate-500 mt-1 uppercase tracking-widest font-semibold">Admin Panel</p>
-</div>
-</div>
-<nav class="flex-1 px-4 space-y-1">
-<a id="nav-dashboard" class="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-primary/10 text-primary font-semibold" href="#">
-<span class="material-symbols-outlined">dashboard</span>
-<span>Dashboard</span>
-</a>
-<a id="nav-reports" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors" href="#">
-<span class="material-symbols-outlined">description</span>
-<span>All Reports</span>
-</a>
-<a id="nav-citizens" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors" href="#">
-<span class="material-symbols-outlined">group</span>
-<span>Citizens</span>
-</a>
-<a id="nav-map" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors" href="#">
-<span class="material-symbols-outlined">map</span>
-<span>Village Map</span>
-</a>
-<div class="pt-4 pb-2">
-<p class="px-3 text-[10px] font-bold text-slate-400 uppercase tracking-wider">Analysis</p>
-</div>
-<a id="nav-performance" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors" href="#">
-<span class="material-symbols-outlined">monitoring</span>
-<span>Performance</span>
-</a>
-<a id="nav-demographics" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors" href="#">
-<span class="material-symbols-outlined">assessment</span>
-<span>Demographics</span>
-</a>
-</nav>
-<div class="p-4 border-t border-slate-200 dark:border-slate-800">
-<button id="btn-settings" class="flex items-center gap-3 w-full px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors mb-2">
-<span class="material-symbols-outlined">settings</span>
-<span>Settings</span>
-</button>
-<div class="flex items-center gap-3 p-2 bg-slate-100 dark:bg-slate-800 rounded-xl">
-<div class="size-10 rounded-lg bg-slate-300 overflow-hidden" data-alt="Admin user profile picture portrait" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDu89xWEL9XN81x3a-QKXZGg82OLORb8Ui1gVith46Lw4KlgdVfMtsAPshOHaY1u5sNcVKnFI8BvmlA0z_C8UQYgZE8in-bhjVHRxhvRq3GxX93p1-vyAfgG2RepqL302GN5civ-5ognZ8oBrg8A_T_JAWr-gxKyTor9zV0usNzq9jLXchJiwTuUgi4QTf_aTfxoR4PrlNum9SVfqSA4ikAyZfMe2BJnJKzUoLMAa5O1Fi0PChd6gWWoqwZ59aIHOB5Ru2ughNgJkc'); background-size: cover;"></div>
-<div class="flex-1 overflow-hidden">
-<p class="text-sm font-bold truncate">Ahmad Subarjo</p>
-<p class="text-[10px] text-slate-500 truncate">Village Head (Kuwu)</p>
-</div>
-</div>
-</div>
-</aside>
-<!-- Main Content -->
-<main class="flex-1 overflow-y-auto bg-background-light dark:bg-background-dark" id="main">
-<!-- Header -->
-<header class="sticky top-0 z-10 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 px-8 py-4 flex items-center justify-between">
-<div>
-<h2 class="text-xl font-bold tracking-tight">Village Analytics Overview</h2>
-<p class="text-xs text-slate-500">Monitoring real-time community reports</p>
-</div>
-<div class="flex items-center gap-4">
-<div class="relative">
-<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-lg">search</span>
-<input id="search-input" class="pl-10 pr-4 py-2 bg-slate-100 dark:bg-slate-800 border-none rounded-lg text-sm w-64 focus:ring-2 focus:ring-primary transition-all" placeholder="Search reports..." type="text"/>
-</div>
-<button id="btn-notifications" class="p-2 bg-slate-100 dark:bg-slate-800 rounded-lg text-slate-600 dark:text-slate-400 relative" aria-haspopup="true" aria-expanded="false">
-<span class="material-symbols-outlined">notifications</span>
-<span class="absolute top-1.5 right-1.5 size-2 bg-red-500 rounded-full border-2 border-white dark:border-slate-800"></span>
-</button>
-<button id="btn-export" class="flex items-center gap-2 px-4 py-2 bg-primary text-white text-sm font-bold rounded-lg hover:bg-primary/90 transition-all">
-<span class="material-symbols-outlined text-[18px]">download</span>
-                        Export Data
-                    </button>
-</div>
-</header>
+  </head>
 
-<!-- Notifications Dropdown (added; does not change layout) -->
-<div id="notifications-popover" class="hidden fixed top-[72px] right-8 z-20 w-80 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl shadow-lg overflow-hidden">
-  <div class="p-4 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between">
-    <p class="text-sm font-bold">Notifications</p>
-    <button id="btn-notifications-close" class="p-1 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800" aria-label="Close notifications">
-      <span class="material-symbols-outlined text-slate-500">close</span>
-    </button>
-  </div>
-  <div class="p-4 space-y-3">
-    <div class="p-3 bg-slate-50 dark:bg-slate-800 rounded-lg">
-      <p class="text-xs font-bold">New urgent report</p>
-      <p class="text-[11px] text-slate-500 mt-1">Illegal dumping near River (Yesterday)</p>
-    </div>
-    <div class="p-3 bg-slate-50 dark:bg-slate-800 rounded-lg">
-      <p class="text-xs font-bold">Report resolved</p>
-      <p class="text-[11px] text-slate-500 mt-1">Waste Overflow Market Area (Yesterday)</p>
-    </div>
-    <div class="p-3 bg-slate-50 dark:bg-slate-800 rounded-lg">
-      <p class="text-xs font-bold">Pending verification</p>
-      <p class="text-[11px] text-slate-500 mt-1">Broken Street Light RT 05 (5h ago)</p>
-    </div>
-  </div>
-</div>
+  <body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen flex flex-col">
+    <!-- Top Navigation Bar -->
+    <header class="w-full bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 sticky top-0 z-50">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between items-center h-16">
+          <!-- Logo -->
+          <div class="flex items-center gap-2">
+            <div class="p-1.5 bg-primary rounded-lg">
+              <svg class="w-6 h-6 text-white" fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M36.7273 44C33.9891 44 31.6043 39.8386 30.3636 33.69C29.123 39.8386 26.7382 44 24 44C21.2618 44 18.877 39.8386 17.6364 33.69C16.3957 39.8386 14.0109 44 11.2727 44C7.25611 44 4 35.0457 4 24C4 12.9543 7.25611 4 11.2727 4C14.0109 4 16.3957 8.16144 17.6364 14.31C18.877 8.16144 21.2618 4 24 4C26.7382 4 29.123 8.16144 30.3636 14.31C31.6043 8.16144 33.9891 4 36.7273 4C40.7439 4 44 12.9543 44 24C44 35.0457 40.7439 44 36.7273 44Z"
+                  fill="currentColor"
+                ></path>
+              </svg>
+            </div>
+            <span class="text-xl font-bold tracking-tight text-slate-900 dark:text-white">Lapor Pak Kuwu</span>
+          </div>
 
-<div class="p-8 space-y-8" id="section-dashboard">
-<!-- KPI Section -->
-<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-<div class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
-<div class="flex justify-between items-start mb-4">
-<div class="p-2 bg-blue-50 dark:bg-blue-900/20 rounded-lg text-primary">
-<span class="material-symbols-outlined">fact_check</span>
-</div>
-<span class="text-xs font-bold text-green-500 bg-green-50 dark:bg-green-900/20 px-2 py-1 rounded">+12.5%</span>
-</div>
-<p class="text-slate-500 text-xs font-bold uppercase tracking-wider">Total Reports</p>
-<h3 class="text-2xl font-black mt-1">1,284</h3>
-<p class="text-[10px] text-slate-400 mt-2">vs 1,141 last month</p>
-</div>
-<div class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
-<div class="flex justify-between items-start mb-4">
-<div class="p-2 bg-orange-50 dark:bg-orange-900/20 rounded-lg text-orange-600">
-<span class="material-symbols-outlined">pending_actions</span>
-</div>
-<span class="text-xs font-bold text-red-500 bg-red-50 dark:bg-red-900/20 px-2 py-1 rounded">-4.2%</span>
-</div>
-<p class="text-slate-500 text-xs font-bold uppercase tracking-wider">Pending Tasks</p>
-<h3 class="text-2xl font-black mt-1">42</h3>
-<p class="text-[10px] text-slate-400 mt-2">Critical urgency level</p>
-</div>
-<div class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
-<div class="flex justify-between items-start mb-4">
-<div class="p-2 bg-green-50 dark:bg-green-900/20 rounded-lg text-green-600">
-<span class="material-symbols-outlined">task_alt</span>
-</div>
-<span class="text-xs font-bold text-green-500 bg-green-50 dark:bg-green-900/20 px-2 py-1 rounded">+18.0%</span>
-</div>
-<p class="text-slate-500 text-xs font-bold uppercase tracking-wider">Resolved Issues</p>
-<h3 class="text-2xl font-black mt-1">1,140</h3>
-<p class="text-[10px] text-slate-400 mt-2">88.7% success rate</p>
-</div>
-<div class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
-<div class="flex justify-between items-start mb-4">
-<div class="p-2 bg-purple-50 dark:bg-purple-900/20 rounded-lg text-purple-600">
-<span class="material-symbols-outlined">schedule</span>
-</div>
-<span class="text-xs font-bold text-green-500 bg-green-50 dark:bg-green-900/20 px-2 py-1 rounded">-10.1%</span>
-</div>
-<p class="text-slate-500 text-xs font-bold uppercase tracking-wider">Avg. Response Time</p>
-<h3 class="text-2xl font-black mt-1">1.5 Days</h3>
-<p class="text-[10px] text-slate-400 mt-2">Improved from 1.8 days</p>
-</div>
-</div>
-<!-- Charts Section -->
-<div class="grid grid-cols-1 lg:grid-cols-3 gap-8" id="section-performance">
-<!-- Main Trend Chart -->
-<div class="lg:col-span-2 bg-white dark:bg-slate-900 p-8 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
-<div class="flex items-center justify-between mb-8">
-<div>
-<h4 class="text-lg font-bold">Monthly Report Trend</h4>
-<p class="text-sm text-slate-500">Volume of reports received over the last 6 months</p>
-</div>
-<select id="year-select" class="text-sm bg-slate-50 dark:bg-slate-800 border-slate-200 dark:border-slate-700 rounded-lg">
-<option>2024</option>
-<option>2023</option>
-</select>
-</div>
-<div class="h-64 relative">
-<!-- SVG Trend Chart Visual -->
-<svg class="w-full h-full" preserveaspectratio="none" viewbox="0 0 100 40">
-<defs>
-<lineargradient id="gradientTrend" x1="0" x2="0" y1="0" y2="1">
-<stop offset="0%" stop-color="#137fec" stop-opacity="0.2"></stop>
-<stop offset="100%" stop-color="#137fec" stop-opacity="0"></stop>
-</lineargradient>
-</defs>
-<path d="M0 40 L0 35 C10 32, 15 38, 25 30 C35 22, 45 35, 55 20 C65 10, 75 15, 85 5 L100 8 L100 40 Z" fill="url(#gradientTrend)"></path>
-<path d="M0 35 C10 32, 15 38, 25 30 C35 22, 45 35, 55 20 C65 10, 75 15, 85 5 L100 8" fill="none" stroke="#137fec" stroke-width="0.5"></path>
-</svg>
-<!-- Axis Labels -->
-<div class="flex justify-between mt-4 text-[10px] font-bold text-slate-400 uppercase tracking-tighter">
-<span>Jan</span><span>Feb</span><span>Mar</span><span>Apr</span><span>May</span><span>Jun</span>
-</div>
-</div>
-</div>
-<!-- Category Distribution -->
-<div class="bg-white dark:bg-slate-900 p-8 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
-<h4 class="text-lg font-bold mb-6">Reports per Category</h4>
-<div class="space-y-6">
-<div class="space-y-2">
-<div class="flex justify-between text-xs font-bold uppercase tracking-wider">
-<span>Infrastructure</span>
-<span>45%</span>
-</div>
-<div class="w-full h-2 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
-<div class="h-full bg-primary rounded-full" style="width: 45%"></div>
-</div>
-</div>
-<div class="space-y-2">
-<div class="flex justify-between text-xs font-bold uppercase tracking-wider">
-<span>Waste Management</span>
-<span>30%</span>
-</div>
-<div class="w-full h-2 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
-<div class="h-full bg-green-500 rounded-full" style="width: 30%"></div>
-</div>
-</div>
-<div class="space-y-2">
-<div class="flex justify-between text-xs font-bold uppercase tracking-wider">
-<span>Public Security</span>
-<span>15%</span>
-</div>
-<div class="w-full h-2 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
-<div class="h-full bg-red-500 rounded-full" style="width: 15%"></div>
-</div>
-</div>
-<div class="space-y-2">
-<div class="flex justify-between text-xs font-bold uppercase tracking-wider">
-<span>Others</span>
-<span>10%</span>
-</div>
-<div class="w-full h-2 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
-<div class="h-full bg-slate-400 rounded-full" style="width: 10%"></div>
-</div>
-</div>
-</div>
-<div class="mt-8 pt-6 border-t border-slate-100 dark:border-slate-800">
-<button id="btn-category-breakdown" class="w-full py-2.5 text-xs font-bold text-primary hover:bg-primary/5 rounded-lg transition-colors">
-                                View Category Breakdown
-                            </button>
-</div>
-</div>
-</div>
-<!-- Recent Activity & Status Distribution -->
-<div class="grid grid-cols-1 lg:grid-cols-2 gap-8" id="section-reports">
-<!-- Recent Reports -->
-<div class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden">
-<div class="p-6 border-b border-slate-200 dark:border-slate-800 flex justify-between items-center">
-<h4 class="text-lg font-bold">Recent Reports</h4>
-<a id="link-view-all" class="text-xs font-bold text-primary hover:underline" href="#">View All</a>
-</div>
-<div class="overflow-x-auto">
-<table class="w-full text-left" id="reports-table">
-<thead class="bg-slate-50 dark:bg-slate-800/50 text-[10px] font-bold uppercase tracking-wider text-slate-500">
-<tr>
-<th class="px-6 py-3">Reported Issue</th>
-<th class="px-6 py-3">Reporter</th>
-<th class="px-6 py-3">Status</th>
-<th class="px-6 py-3">Date</th>
-</tr>
-</thead>
-<tbody class="divide-y divide-slate-100 dark:divide-slate-800 text-sm" id="reports-tbody">
-<tr>
-<td class="px-6 py-4">
-<p class="font-bold truncate max-w-[200px]">Pothole on Jalan Melati</p>
-<p class="text-xs text-slate-500">Infrastructure</p>
-</td>
-<td class="px-6 py-4">Budi Santoso</td>
-<td class="px-6 py-4">
-<span class="px-2 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 text-[10px] font-bold rounded uppercase">In Progress</span>
-</td>
-<td class="px-6 py-4 text-xs text-slate-500">2h ago</td>
-</tr>
-<tr>
-<td class="px-6 py-4">
-<p class="font-bold truncate max-w-[200px]">Broken Street Light RT 05</p>
-<p class="text-xs text-slate-500">Public Service</p>
-</td>
-<td class="px-6 py-4">Siti Aminah</td>
-<td class="px-6 py-4">
-<span class="px-2 py-1 bg-orange-100 dark:bg-orange-900/30 text-orange-600 dark:text-orange-400 text-[10px] font-bold rounded uppercase">Pending</span>
-</td>
-<td class="px-6 py-4 text-xs text-slate-500">5h ago</td>
-</tr>
-<tr>
-<td class="px-6 py-4">
-<p class="font-bold truncate max-w-[200px]">Waste Overflow Market Area</p>
-<p class="text-xs text-slate-500">Waste Mgmt</p>
-</td>
-<td class="px-6 py-4">Iwan Fals</td>
-<td class="px-6 py-4">
-<span class="px-2 py-1 bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400 text-[10px] font-bold rounded uppercase">Resolved</span>
-</td>
-<td class="px-6 py-4 text-xs text-slate-500">Yesterday</td>
-</tr>
-<tr>
-<td class="px-6 py-4">
-<p class="font-bold truncate max-w-[200px]">Illegal Dumping near River</p>
-<p class="text-xs text-slate-500">Environment</p>
-</td>
-<td class="px-6 py-4">Rina Wati</td>
-<td class="px-6 py-4">
-<span class="px-2 py-1 bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400 text-[10px] font-bold rounded uppercase">Urgent</span>
-</td>
-<td class="px-6 py-4 text-xs text-slate-500">Yesterday</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<!-- Map/Location Focus -->
-<div class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden flex flex-col" id="section-map">
-<div class="p-6 border-b border-slate-200 dark:border-slate-800">
-<h4 class="text-lg font-bold">Report Heatmap</h4>
-<p class="text-xs text-slate-500">Geographic distribution of reported issues</p>
-</div>
-<div class="flex-1 bg-slate-200 dark:bg-slate-800 relative group overflow-hidden">
-<!-- Placeholder for Map Visualization -->
-<div class="absolute inset-0 bg-cover bg-center transition-transform group-hover:scale-105" data-alt="Satellite map view of a village area with report pin indicators" data-location="West Java Village Area" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDc92CVVDtybgxNZl01yYE5_Awc9hXIg-WNAMGsjJMI0VFEg_52pAWSDRtKqTWR5Z-iCEsFNzUvb1Lv6sN603IkQliYSO5SA6Ud9blhARcr1jRx-1lk3SCD3iWMi1-ms46818XbIcoKP70GaFrcKKNf62eF8iUoVah41N1Yq2FRjr2tKo694ZURyHAkTV2O6-NND-rFCftxS4f8zaltG3j2338ZApHSmLiOF7q-nrulZs8VV2abioDithhzn3vDPjiuY8O1TL2N21Y')">
-</div>
-<!-- Map Overlay -->
-<div class="absolute inset-0 bg-primary/10 pointer-events-none"></div>
-<!-- Dummy Pins -->
-<div class="absolute top-1/4 left-1/3 size-4 bg-red-500 rounded-full border-2 border-white animate-pulse"></div>
-<div class="absolute top-1/2 left-1/2 size-4 bg-primary rounded-full border-2 border-white"></div>
-<div class="absolute bottom-1/4 right-1/4 size-4 bg-green-500 rounded-full border-2 border-white"></div>
-<div class="absolute bottom-4 left-4 right-4 bg-white/90 dark:bg-slate-900/90 backdrop-blur-sm p-3 rounded-lg border border-slate-200 dark:border-slate-800 shadow-lg flex items-center justify-between">
-<div class="flex items-center gap-2">
-<span class="material-symbols-outlined text-primary">location_on</span>
-<div>
-<p class="text-xs font-bold">Desa Maju Jaya</p>
-<p class="text-[10px] text-slate-500">Kecamatan Sukamakmur</p>
-</div>
-</div>
-<button id="btn-expand-map" class="px-3 py-1.5 bg-primary text-white text-[10px] font-bold rounded-lg uppercase">Expand Map</button>
-</div>
-</div>
-</div>
-</div>
-
-<!-- Citizens + Demographics placeholder sections (added invisible anchors; no style change) -->
-<div id="section-citizens" class="hidden"></div>
-<div id="section-demographics" class="hidden"></div>
-
-</div>
-<!-- Footer -->
-<footer class="p-8 mt-4 border-t border-slate-200 dark:border-slate-800 text-center">
-<p class="text-xs text-slate-400">© 2024 Lapor Pak Kuwu Village Portal. All data processed securely according to regional regulations.</p>
-</footer>
-</main>
-</div>
-
-<!-- SETTINGS MODAL (added; overlay only) -->
-<div id="modal-settings" class="hidden fixed inset-0 z-30">
-  <div class="absolute inset-0 bg-slate-900/40"></div>
-  <div class="relative mx-auto mt-24 w-[92%] max-w-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl shadow-xl overflow-hidden">
-    <div class="p-5 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between">
-      <div>
-        <p class="text-sm font-bold">Settings</p>
-        <p class="text-[11px] text-slate-500 mt-0.5">Local UI preferences</p>
-      </div>
-      <button id="btn-settings-close" class="p-1 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800" aria-label="Close settings">
-        <span class="material-symbols-outlined text-slate-500">close</span>
-      </button>
-    </div>
-    <div class="p-5 space-y-4">
-      <div class="flex items-center justify-between p-3 bg-slate-50 dark:bg-slate-800 rounded-lg">
-        <div>
-          <p class="text-xs font-bold">Dark Mode</p>
-          <p class="text-[11px] text-slate-500 mt-0.5">Toggle theme (saved locally)</p>
+          <!-- Desktop Nav -->
+          <nav class="hidden md:flex items-center space-x-8">
+            <a
+              class="text-sm font-medium text-slate-600 hover:text-primary dark:text-slate-400 dark:hover:text-primary transition-colors"
+              href="#tentang"
+              data-open="modalTentang"
+              >Tentang Kami</a
+            >
+            <a
+              class="text-sm font-medium text-slate-600 hover:text-primary dark:text-slate-400 dark:hover:text-primary transition-colors"
+              href="#bantuan"
+              data-open="modalBantuan"
+              >Bantuan</a
+            >
+            <a
+              class="inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-bold rounded-lg text-white bg-primary hover:bg-blue-600 transition-all shadow-sm"
+              href="#login"
+              data-open="modalLogin"
+            >
+              Masuk
+            </a>
+          </nav>
         </div>
-        <button id="btn-toggle-dark" class="px-3 py-1.5 bg-primary text-white text-[11px] font-bold rounded-lg">Toggle</button>
       </div>
-      <div class="flex items-center justify-between p-3 bg-slate-50 dark:bg-slate-800 rounded-lg">
-        <div>
-          <p class="text-xs font-bold">Clear Search</p>
-          <p class="text-[11px] text-slate-500 mt-0.5">Reset report filter</p>
+    </header>
+
+    <main class="flex-grow flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8" id="register">
+      <div class="max-w-md w-full space-y-8">
+        <!-- Form Card -->
+        <div class="bg-white dark:bg-slate-900 shadow-xl rounded-xl p-8 border border-slate-100 dark:border-slate-800">
+          <!-- Header Title -->
+          <div class="text-center mb-8">
+            <h2 class="text-3xl font-black text-slate-900 dark:text-white tracking-tight">Registrasi Warga Baru</h2>
+            <p class="mt-2 text-sm text-slate-500 dark:text-slate-400">
+              Silakan lengkapi data diri Anda untuk bergabung dengan layanan pelaporan desa terpadu.
+            </p>
+          </div>
+
+          <form id="registerForm" action="#" class="space-y-5" method="POST" novalidate>
+            <!-- Nama Lengkap -->
+            <div>
+              <label class="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-1.5" for="full_name"
+                >Nama Lengkap</label
+              >
+              <div class="relative">
+                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                  <span class="material-symbols-outlined text-slate-400 text-lg">person</span>
+                </div>
+                <input
+                  class="block w-full pl-10 pr-3 py-3 border border-slate-300 dark:border-slate-700 rounded-lg bg-white dark:bg-slate-800 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-sm"
+                  id="full_name"
+                  name="full_name"
+                  placeholder="Contoh: Budi Santoso"
+                  required
+                  type="text"
+                />
+              </div>
+            </div>
+
+            <!-- NIK -->
+            <div>
+              <div class="flex justify-between">
+                <label class="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-1.5" for="nik">NIK</label>
+                <span
+                  class="text-[10px] font-medium text-slate-400 uppercase tracking-wider bg-slate-100 dark:bg-slate-800 px-1.5 py-0.5 rounded"
+                  >Opsional</span
+                >
+              </div>
+              <div class="relative">
+                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                  <span class="material-symbols-outlined text-slate-400 text-lg">badge</span>
+                </div>
+                <input
+                  class="block w-full pl-10 pr-3 py-3 border border-slate-300 dark:border-slate-700 rounded-lg bg-white dark:bg-slate-800 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-sm"
+                  id="nik"
+                  maxlength="16"
+                  name="nik"
+                  placeholder="Masukkan 16 digit NIK"
+                  type="text"
+                  inputmode="numeric"
+                />
+              </div>
+            </div>
+
+            <!-- Dusun -->
+            <div>
+              <label class="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-1.5" for="dusun">Dusun</label>
+              <div class="relative">
+                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                  <span class="material-symbols-outlined text-slate-400 text-lg">location_home</span>
+                </div>
+                <select
+                  class="custom-select-icon block w-full pl-10 pr-3 py-3 border border-slate-300 dark:border-slate-700 rounded-lg bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-sm"
+                  id="dusun"
+                  name="dusun"
+                  required
+                >
+                  <option disabled selected value="">Pilih Dusun</option>
+                  <option value="Dusun Mekar Jaya">Dusun Mekar Jaya</option>
+                  <option value="Dusun Sari Mulya">Dusun Sari Mulya</option>
+                  <option value="Dusun Wangi Harja">Dusun Wangi Harja</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- RT/RW Row -->
+            <div class="grid grid-cols-2 gap-4">
+              <div>
+                <label class="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-1.5" for="rt">RT</label>
+                <input
+                  class="block w-full px-3 py-3 border border-slate-300 dark:border-slate-700 rounded-lg bg-white dark:bg-slate-800 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-sm text-center"
+                  id="rt"
+                  name="rt"
+                  placeholder="001"
+                  required
+                  type="text"
+                  inputmode="numeric"
+                />
+              </div>
+              <div>
+                <label class="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-1.5" for="rw">RW</label>
+                <input
+                  class="block w-full px-3 py-3 border border-slate-300 dark:border-slate-700 rounded-lg bg-white dark:bg-slate-800 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-sm text-center"
+                  id="rw"
+                  name="rw"
+                  placeholder="002"
+                  required
+                  type="text"
+                  inputmode="numeric"
+                />
+              </div>
+            </div>
+
+            <!-- No HP -->
+            <div>
+              <label class="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-1.5" for="phone"
+                >Nomor Handphone (WA)</label
+              >
+              <div class="flex">
+                <span
+                  class="inline-flex items-center px-4 rounded-l-lg border border-r-0 border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-500 dark:text-slate-400 text-sm"
+                >
+                  +62
+                </span>
+                <input
+                  class="block w-full px-3 py-3 border border-slate-300 dark:border-slate-700 rounded-r-lg bg-white dark:bg-slate-800 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-sm"
+                  id="phone"
+                  name="phone"
+                  placeholder="8123456789"
+                  required
+                  type="tel"
+                  inputmode="tel"
+                />
+              </div>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="pt-4">
+              <button
+                class="w-full flex items-center justify-center px-4 py-4 border border-transparent rounded-lg shadow-sm text-base font-bold text-white bg-primary hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary transition-all transform active:scale-[0.98]"
+                type="submit"
+              >
+                Daftar Sekarang
+              </button>
+            </div>
+
+            <!-- Login Link -->
+            <div class="text-center mt-6">
+              <p class="text-sm text-slate-600 dark:text-slate-400">
+                Sudah punya akun?
+                <a class="font-bold text-primary hover:text-blue-700 transition-colors" href="#login" data-open="modalLogin"
+                  >Masuk</a
+                >
+              </p>
+            </div>
+          </form>
         </div>
-        <button id="btn-clear-search" class="px-3 py-1.5 bg-slate-200 dark:bg-slate-700 text-slate-800 dark:text-slate-100 text-[11px] font-bold rounded-lg">Reset</button>
+
+        <!-- Additional Links / Footer -->
+        <div class="flex justify-center space-x-6 text-xs text-slate-400 dark:text-slate-600 pb-8">
+          <a class="hover:text-slate-600 dark:hover:text-slate-400 transition-colors" href="#terms" data-open="modalTerms"
+            >Ketentuan Layanan</a
+          >
+          <a class="hover:text-slate-600 dark:hover:text-slate-400 transition-colors" href="#privacy" data-open="modalPrivacy"
+            >Kebijakan Privasi</a
+          >
+          <a class="hover:text-slate-600 dark:hover:text-slate-400 transition-colors" href="#contact" data-open="modalContact"
+            >Hubungi Kami</a
+          >
+        </div>
+      </div>
+    </main>
+
+    <!-- Mobile Navigation Bar -->
+    <div
+      class="md:hidden fixed bottom-6 left-1/2 -translate-x-1/2 w-[90%] bg-white/80 dark:bg-slate-900/80 backdrop-blur-lg shadow-2xl rounded-full border border-slate-200 dark:border-slate-800 p-2 flex justify-between items-center px-6 z-50"
+    >
+      <a id="navRegister" href="#register" class="flex flex-col items-center gap-1 text-primary">
+        <span class="material-symbols-outlined text-2xl">person_add</span>
+        <span class="text-[10px] font-bold">Daftar</span>
+      </a>
+
+      <a id="navLogin" href="#login" data-open="modalLogin" class="flex flex-col items-center gap-1 text-slate-400">
+        <span class="material-symbols-outlined text-2xl">login</span>
+        <span class="text-[10px] font-medium">Masuk</span>
+      </a>
+
+      <a id="navHelp" href="#bantuan" data-open="modalBantuan" class="flex flex-col items-center gap-1 text-slate-400">
+        <span class="material-symbols-outlined text-2xl">help</span>
+        <span class="text-[10px] font-medium">Bantuan</span>
+      </a>
+    </div>
+
+    <!-- ===== Modals (tanpa merusak desain utama) ===== -->
+    <div id="modalRoot" class="hidden fixed inset-0 z-[9999]">
+      <div id="modalBackdrop" class="absolute inset-0 bg-slate-900/50 backdrop-blur-sm"></div>
+
+      <div class="relative min-h-screen flex items-center justify-center p-4">
+        <!-- Modal Card -->
+        <div
+          id="modalCard"
+          class="modal-enter w-full max-w-md bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-xl shadow-2xl overflow-hidden"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="modalTitle"
+        >
+          <!-- Modal Header -->
+          <div class="flex items-center justify-between px-6 py-4 border-b border-slate-100 dark:border-slate-800">
+            <div class="flex items-center gap-2">
+              <div class="p-1.5 bg-primary rounded-lg">
+                <svg class="w-5 h-5 text-white" fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M36.7273 44C33.9891 44 31.6043 39.8386 30.3636 33.69C29.123 39.8386 26.7382 44 24 44C21.2618 44 18.877 39.8386 17.6364 33.69C16.3957 39.8386 14.0109 44 11.2727 44C7.25611 44 4 35.0457 4 24C4 12.9543 7.25611 4 11.2727 4C14.0109 4 16.3957 8.16144 17.6364 14.31C18.877 8.16144 21.2618 4 24 4C26.7382 4 29.123 8.16144 30.3636 14.31C31.6043 8.16144 33.9891 4 36.7273 4C40.7439 4 44 12.9543 44 24C44 35.0457 40.7439 44 36.7273 44Z"
+                    fill="currentColor"
+                  ></path>
+                </svg>
+              </div>
+              <div>
+                <div id="modalTitle" class="text-sm font-black text-slate-900 dark:text-white tracking-tight">
+                  Lapor Pak Kuwu
+                </div>
+                <div id="modalSubtitle" class="text-[11px] text-slate-500 dark:text-slate-400">—</div>
+              </div>
+            </div>
+
+            <button
+              id="modalClose"
+              class="w-10 h-10 rounded-lg border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 hover:text-primary hover:border-primary transition flex items-center justify-center"
+              aria-label="Tutup"
+            >
+              <span class="material-symbols-outlined text-xl">close</span>
+            </button>
+          </div>
+
+          <!-- Modal Body -->
+          <div id="modalBody" class="p-6"></div>
+        </div>
       </div>
     </div>
-    <div class="p-5 border-t border-slate-200 dark:border-slate-800 flex justify-end">
-      <button id="btn-settings-done" class="px-4 py-2 bg-primary text-white text-sm font-bold rounded-lg hover:bg-primary/90 transition-all">Done</button>
-    </div>
-  </div>
-</div>
 
-<!-- CATEGORY MODAL (added) -->
-<div id="modal-category" class="hidden fixed inset-0 z-30">
-  <div class="absolute inset-0 bg-slate-900/40"></div>
-  <div class="relative mx-auto mt-24 w-[92%] max-w-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl shadow-xl overflow-hidden">
-    <div class="p-5 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between">
-      <div>
-        <p class="text-sm font-bold">Category Breakdown</p>
-        <p class="text-[11px] text-slate-500 mt-0.5">Detailed distribution (demo)</p>
+    <!-- ===== Templates (konten modal) ===== -->
+    <template id="tplLogin">
+      <div class="space-y-4">
+        <div class="text-center">
+          <h3 class="text-2xl font-black text-slate-900 dark:text-white tracking-tight">Masuk</h3>
+          <p class="mt-1 text-sm text-slate-500 dark:text-slate-400">Masuk menggunakan nomor HP/email (demo).</p>
+        </div>
+
+        <div>
+          <label class="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-1.5" for="login_id"
+            >Nomor HP / Email</label
+          >
+          <input
+            id="login_id"
+            class="block w-full px-3 py-3 border border-slate-300 dark:border-slate-700 rounded-lg bg-white dark:bg-slate-800 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-sm"
+            placeholder="contoh: 812xxxx / nama@email.com"
+            type="text"
+          />
+        </div>
+
+        <div class="grid grid-cols-2 gap-3">
+          <button
+            id="btnSendOtp"
+            class="flex items-center justify-center px-4 py-3 rounded-lg border border-slate-200 dark:border-slate-700 text-sm font-bold text-slate-700 dark:text-slate-200 hover:border-primary hover:text-primary transition-all"
+            type="button"
+          >
+            Kirim OTP
+          </button>
+          <button
+            id="btnTheme"
+            class="flex items-center justify-center px-4 py-3 rounded-lg border border-slate-200 dark:border-slate-700 text-sm font-bold text-slate-700 dark:text-slate-200 hover:border-primary hover:text-primary transition-all"
+            type="button"
+            title="Toggle Dark Mode"
+          >
+            Toggle Dark
+          </button>
+        </div>
+
+        <div>
+          <label class="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-1.5" for="otp"
+            >OTP (demo: 123456)</label
+          >
+          <input
+            id="otp"
+            class="block w-full px-3 py-3 border border-slate-300 dark:border-slate-700 rounded-lg bg-white dark:bg-slate-800 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-sm tracking-[0.35em] text-center"
+            placeholder="••••••"
+            type="text"
+            inputmode="numeric"
+            maxlength="6"
+          />
+        </div>
+
+        <button
+          id="btnLogin"
+          class="w-full flex items-center justify-center px-4 py-4 border border-transparent rounded-lg shadow-sm text-base font-bold text-white bg-primary hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary transition-all transform active:scale-[0.98]"
+          type="button"
+        >
+          Masuk
+        </button>
+
+        <div class="text-center text-sm text-slate-600 dark:text-slate-400">
+          Belum punya akun?
+          <a class="font-bold text-primary hover:text-blue-700 transition-colors" href="#register" data-close>Daftar</a>
+        </div>
       </div>
-      <button id="btn-category-close" class="p-1 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800" aria-label="Close breakdown">
-        <span class="material-symbols-outlined text-slate-500">close</span>
-      </button>
-    </div>
-    <div class="p-5 space-y-3 text-sm">
-      <div class="flex justify-between"><span class="text-slate-500">Infrastructure</span><span class="font-bold">45%</span></div>
-      <div class="flex justify-between"><span class="text-slate-500">Waste Management</span><span class="font-bold">30%</span></div>
-      <div class="flex justify-between"><span class="text-slate-500">Public Security</span><span class="font-bold">15%</span></div>
-      <div class="flex justify-between"><span class="text-slate-500">Others</span><span class="font-bold">10%</span></div>
-      <p class="text-[11px] text-slate-500 pt-2">Note: This is a front-end demo breakdown based on the static UI.</p>
-    </div>
-    <div class="p-5 border-t border-slate-200 dark:border-slate-800 flex justify-end">
-      <button id="btn-category-ok" class="px-4 py-2 bg-primary text-white text-sm font-bold rounded-lg hover:bg-primary/90 transition-all">Close</button>
-    </div>
-  </div>
-</div>
+    </template>
 
-<!-- MAP MODAL (added) -->
-<div id="modal-map" class="hidden fixed inset-0 z-30">
-  <div class="absolute inset-0 bg-slate-900/40"></div>
-  <div class="relative mx-auto mt-10 w-[92%] max-w-5xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl shadow-xl overflow-hidden">
-    <div class="p-5 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between">
-      <div>
-        <p class="text-sm font-bold">Report Heatmap</p>
-        <p class="text-[11px] text-slate-500 mt-0.5">Expanded view (demo)</p>
+    <template id="tplDashboard">
+      <div class="space-y-4">
+        <div class="text-center">
+          <h3 class="text-2xl font-black text-slate-900 dark:text-white tracking-tight">Dashboard (Demo)</h3>
+          <p class="mt-1 text-sm text-slate-500 dark:text-slate-400">
+            Ini mode percobaan single-file untuk GitHub. Data pengguna tersimpan di browser Anda.
+          </p>
+        </div>
+
+        <div class="rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800/40 p-4">
+          <div class="flex items-start gap-3">
+            <span class="material-symbols-outlined text-primary">account_circle</span>
+            <div class="min-w-0">
+              <div class="text-sm font-bold text-slate-900 dark:text-white" id="dashName">—</div>
+              <div class="text-xs text-slate-500 dark:text-slate-400" id="dashMeta">—</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-3">
+          <button
+            id="btnToRegister"
+            class="flex items-center justify-center px-4 py-3 rounded-lg border border-slate-200 dark:border-slate-700 text-sm font-bold text-slate-700 dark:text-slate-200 hover:border-primary hover:text-primary transition-all"
+            type="button"
+          >
+            Kembali
+          </button>
+          <button
+            id="btnLogout"
+            class="flex items-center justify-center px-4 py-3 rounded-lg border border-transparent text-sm font-bold text-white bg-primary hover:bg-blue-600 transition-all"
+            type="button"
+          >
+            Keluar
+          </button>
+        </div>
       </div>
-      <button id="btn-map-close" class="p-1 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800" aria-label="Close map">
-        <span class="material-symbols-outlined text-slate-500">close</span>
-      </button>
-    </div>
-    <div class="p-5">
-      <div class="w-full h-[60vh] bg-slate-200 dark:bg-slate-800 rounded-xl overflow-hidden relative">
-        <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDc92CVVDtybgxNZl01yYE5_Awc9hXIg-WNAMGsjJMI0VFEg_52pAWSDRtKqTWR5Z-iCEsFNzUvb1Lv6sN603IkQliYSO5SA6Ud9blhARcr1jRx-1lk3SCD3iWMi1-ms46818XbIcoKP70GaFrcKKNf62eF8iUoVah41N1Yq2FRjr2tKo694ZURyHAkTV2O6-NND-rFCftxS4f8zaltG3j2338ZApHSmLiOF7q-nrulZs8VV2abioDithhzn3vDPjiuY8O1TL2N21Y')"></div>
-        <div class="absolute inset-0 bg-primary/10 pointer-events-none"></div>
-        <div class="absolute top-1/4 left-1/3 size-4 bg-red-500 rounded-full border-2 border-white animate-pulse"></div>
-        <div class="absolute top-1/2 left-1/2 size-4 bg-primary rounded-full border-2 border-white"></div>
-        <div class="absolute bottom-1/4 right-1/4 size-4 bg-green-500 rounded-full border-2 border-white"></div>
+    </template>
+
+    <template id="tplBantuan">
+      <div class="space-y-3">
+        <h3 class="text-2xl font-black text-slate-900 dark:text-white tracking-tight">Bantuan</h3>
+        <p class="text-sm text-slate-600 dark:text-slate-400">
+          Ini versi demo single-file. Tombol dan navigasi sudah saling terhubung untuk uji coba di GitHub Pages.
+        </p>
+        <ul class="text-sm text-slate-600 dark:text-slate-400 list-disc pl-5 space-y-1">
+          <li>Registrasi menyimpan data ke localStorage.</li>
+          <li>Masuk memakai OTP demo: <span class="font-bold text-slate-900 dark:text-white">123456</span>.</li>
+          <li>Dark mode bisa di-toggle dari modal Masuk.</li>
+        </ul>
       </div>
-      <p class="text-[11px] text-slate-500 mt-3">This is a static map preview for GitHub Pages demo. Replace with real map (Leaflet/Mapbox/Google Maps) for production.</p>
-    </div>
-  </div>
-</div>
+    </template>
 
-<script>
-/**
- * IMPORTANT:
- * - This script only adds functionality to existing buttons/links.
- * - It does NOT change your design structure or Tailwind classes except for active nav highlighting.
- */
+    <template id="tplTentang">
+      <div class="space-y-3">
+        <h3 class="text-2xl font-black text-slate-900 dark:text-white tracking-tight">Tentang Kami</h3>
+        <p class="text-sm text-slate-600 dark:text-slate-400">
+          <span class="font-bold text-slate-900 dark:text-white">Lapor Pak Kuwu</span> adalah layanan pelaporan desa untuk
+          keluhan, aspirasi, dan kejadian warga secara cepat dan transparan.
+        </p>
+      </div>
+    </template>
 
-(function () {
-  const docEl = document.documentElement;
-  const main = document.getElementById("main");
+    <template id="tplTerms">
+      <div class="space-y-2">
+        <h3 class="text-2xl font-black text-slate-900 dark:text-white tracking-tight">Ketentuan Layanan</h3>
+        <p class="text-sm text-slate-600 dark:text-slate-400">
+          Ini konten placeholder demo. Anda bisa mengganti dengan ketentuan resmi desa.
+        </p>
+      </div>
+    </template>
 
-  // --------- Helpers ----------
-  function show(el) { el.classList.remove("hidden"); }
-  function hide(el) { el.classList.add("hidden"); }
+    <template id="tplPrivacy">
+      <div class="space-y-2">
+        <h3 class="text-2xl font-black text-slate-900 dark:text-white tracking-tight">Kebijakan Privasi</h3>
+        <p class="text-sm text-slate-600 dark:text-slate-400">
+          Ini konten placeholder demo. Data demo disimpan lokal di perangkat (localStorage), bukan ke server.
+        </p>
+      </div>
+    </template>
 
-  function saveTheme(isDark) {
-    try { localStorage.setItem("lpkuwu_theme", isDark ? "dark" : "light"); } catch(e) {}
-  }
-  function loadTheme() {
-    try { return localStorage.getItem("lpkuwu_theme"); } catch(e) { return null; }
-  }
-  function setDarkMode(enabled) {
-    if (enabled) docEl.classList.add("dark");
-    else docEl.classList.remove("dark");
-    saveTheme(enabled);
-  }
-  // Initialize theme from localStorage (doesn't alter UI structure)
-  const storedTheme = loadTheme();
-  if (storedTheme === "dark") setDarkMode(true);
-  if (storedTheme === "light") setDarkMode(false);
+    <template id="tplContact">
+      <div class="space-y-2">
+        <h3 class="text-2xl font-black text-slate-900 dark:text-white tracking-tight">Hubungi Kami</h3>
+        <div class="text-sm text-slate-600 dark:text-slate-400 space-y-1">
+          <div><span class="font-semibold text-slate-900 dark:text-white">Kantor Desa:</span> (contoh) 08xx-xxxx-xxxx</div>
+          <div><span class="font-semibold text-slate-900 dark:text-white">Jam Layanan:</span> Senin–Jumat, 08.00–15.00</div>
+        </div>
+      </div>
+    </template>
 
-  function smoothScrollToId(id) {
-    const el = document.getElementById(id);
-    if (!el) return;
-    el.scrollIntoView({ behavior: "smooth", block: "start" });
-  }
+    <script>
+      // ========= Utilities =========
+      const $ = (sel, root = document) => root.querySelector(sel);
+      const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
 
-  // Nav active styling (keep original style, just toggle classes)
-  const navLinks = [
-    { id: "nav-dashboard", section: "section-dashboard" },
-    { id: "nav-reports", section: "section-reports" },
-    { id: "nav-citizens", section: "section-citizens" },
-    { id: "nav-map", section: "section-map" },
-    { id: "nav-performance", section: "section-performance" },
-    { id: "nav-demographics", section: "section-demographics" },
-  ];
-
-  function setActiveNav(navId) {
-    navLinks.forEach(n => {
-      const a = document.getElementById(n.id);
-      if (!a) return;
-      // reset to default (same classes as original non-active items)
-      a.classList.remove("bg-primary/10", "text-primary", "font-semibold");
-      a.classList.add("text-slate-600", "dark:text-slate-400");
-      if (n.id === navId) {
-        a.classList.add("bg-primary/10", "text-primary", "font-semibold");
-        a.classList.remove("text-slate-600", "dark:text-slate-400");
+      function toast(msg, type = "info") {
+        const wrap = document.createElement("div");
+        wrap.className =
+          "fixed top-5 left-1/2 -translate-x-1/2 z-[99999] px-4 py-3 rounded-xl shadow-2xl text-sm font-semibold " +
+          (type === "success"
+            ? "bg-emerald-600 text-white"
+            : type === "error"
+            ? "bg-rose-600 text-white"
+            : "bg-slate-900 text-white");
+        wrap.textContent = msg;
+        document.body.appendChild(wrap);
+        setTimeout(() => wrap.remove(), 2200);
       }
-    });
-  }
 
-  navLinks.forEach(n => {
-    const a = document.getElementById(n.id);
-    if (!a) return;
-    a.addEventListener("click", (e) => {
-      e.preventDefault();
-      smoothScrollToId(n.section);
-      setActiveNav(n.id);
-    });
-  });
-
-  // --------- Search filter (Recent Reports table) ----------
-  const searchInput = document.getElementById("search-input");
-  const tbody = document.getElementById("reports-tbody");
-
-  function filterReports(query) {
-    if (!tbody) return;
-    const q = (query || "").trim().toLowerCase();
-    const rows = Array.from(tbody.querySelectorAll("tr"));
-    rows.forEach(row => {
-      const text = row.innerText.toLowerCase();
-      row.style.display = text.includes(q) ? "" : "none";
-    });
-  }
-
-  if (searchInput) {
-    searchInput.addEventListener("input", (e) => filterReports(e.target.value));
-  }
-
-  // --------- View All link ----------
-  const viewAll = document.getElementById("link-view-all");
-  if (viewAll) {
-    viewAll.addEventListener("click", (e) => {
-      e.preventDefault();
-      smoothScrollToId("section-reports");
-      setActiveNav("nav-reports");
-    });
-  }
-
-  // --------- Notifications dropdown ----------
-  const btnNotif = document.getElementById("btn-notifications");
-  const notifPopover = document.getElementById("notifications-popover");
-  const btnNotifClose = document.getElementById("btn-notifications-close");
-
-  function toggleNotifications(forceState) {
-    if (!notifPopover || !btnNotif) return;
-    const isHidden = notifPopover.classList.contains("hidden");
-    const shouldOpen = typeof forceState === "boolean" ? forceState : isHidden;
-    if (shouldOpen) {
-      show(notifPopover);
-      btnNotif.setAttribute("aria-expanded", "true");
-    } else {
-      hide(notifPopover);
-      btnNotif.setAttribute("aria-expanded", "false");
-    }
-  }
-
-  if (btnNotif) btnNotif.addEventListener("click", (e) => { e.stopPropagation(); toggleNotifications(); });
-  if (btnNotifClose) btnNotifClose.addEventListener("click", () => toggleNotifications(false));
-
-  document.addEventListener("click", (e) => {
-    // close notifications if click outside
-    if (!notifPopover || notifPopover.classList.contains("hidden")) return;
-    if (notifPopover.contains(e.target) || (btnNotif && btnNotif.contains(e.target))) return;
-    toggleNotifications(false);
-  });
-
-  // --------- Export CSV from table ----------
-  const btnExport = document.getElementById("btn-export");
-  const reportsTable = document.getElementById("reports-table");
-
-  function tableToCSV(table) {
-    const rows = Array.from(table.querySelectorAll("tr"));
-    return rows.map(row => {
-      const cols = Array.from(row.querySelectorAll("th,td"));
-      return cols.map(col => {
-        const raw = col.innerText.replace(/\s+/g, " ").trim();
-        const escaped = `"${raw.replace(/"/g, '""')}"`;
-        return escaped;
-      }).join(",");
-    }).join("\n");
-  }
-
-  function downloadText(filename, text) {
-    const blob = new Blob([text], { type: "text/csv;charset=utf-8;" });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = filename;
-    document.body.appendChild(a);
-    a.click();
-    a.remove();
-    URL.revokeObjectURL(url);
-  }
-
-  if (btnExport && reportsTable) {
-    btnExport.addEventListener("click", () => {
-      const csv = tableToCSV(reportsTable);
-      const ts = new Date();
-      const pad = (n) => String(n).padStart(2, "0");
-      const name = `lapor-pak-kuwu-recent-reports-${ts.getFullYear()}-${pad(ts.getMonth()+1)}-${pad(ts.getDate())}.csv`;
-      downloadText(name, csv);
-    });
-  }
-
-  // --------- Settings modal ----------
-  const btnSettings = document.getElementById("btn-settings");
-  const modalSettings = document.getElementById("modal-settings");
-  const btnSettingsClose = document.getElementById("btn-settings-close");
-  const btnSettingsDone = document.getElementById("btn-settings-done");
-  const btnToggleDark = document.getElementById("btn-toggle-dark");
-  const btnClearSearch = document.getElementById("btn-clear-search");
-
-  function openSettings() { if (modalSettings) show(modalSettings); }
-  function closeSettings() { if (modalSettings) hide(modalSettings); }
-
-  if (btnSettings) btnSettings.addEventListener("click", openSettings);
-  if (btnSettingsClose) btnSettingsClose.addEventListener("click", closeSettings);
-  if (btnSettingsDone) btnSettingsDone.addEventListener("click", closeSettings);
-
-  if (btnToggleDark) {
-    btnToggleDark.addEventListener("click", () => {
-      const isDark = docEl.classList.contains("dark");
-      setDarkMode(!isDark);
-    });
-  }
-
-  if (btnClearSearch && searchInput) {
-    btnClearSearch.addEventListener("click", () => {
-      searchInput.value = "";
-      filterReports("");
-    });
-  }
-
-  // Close modals on Escape
-  document.addEventListener("keydown", (e) => {
-    if (e.key !== "Escape") return;
-    if (modalSettings && !modalSettings.classList.contains("hidden")) closeSettings();
-    if (modalCategory && !modalCategory.classList.contains("hidden")) closeCategory();
-    if (modalMap && !modalMap.classList.contains("hidden")) closeMap();
-    if (notifPopover && !notifPopover.classList.contains("hidden")) toggleNotifications(false);
-  });
-
-  // --------- Category Breakdown modal ----------
-  const btnCategory = document.getElementById("btn-category-breakdown");
-  const modalCategory = document.getElementById("modal-category");
-  const btnCategoryClose = document.getElementById("btn-category-close");
-  const btnCategoryOk = document.getElementById("btn-category-ok");
-
-  function openCategory() { if (modalCategory) show(modalCategory); }
-  function closeCategory() { if (modalCategory) hide(modalCategory); }
-
-  if (btnCategory) btnCategory.addEventListener("click", openCategory);
-  if (btnCategoryClose) btnCategoryClose.addEventListener("click", closeCategory);
-  if (btnCategoryOk) btnCategoryOk.addEventListener("click", closeCategory);
-
-  // --------- Expand Map modal ----------
-  const btnExpandMap = document.getElementById("btn-expand-map");
-  const modalMap = document.getElementById("modal-map");
-  const btnMapClose = document.getElementById("btn-map-close");
-
-  function openMap() { if (modalMap) show(modalMap); }
-  function closeMap() { if (modalMap) hide(modalMap); }
-
-  if (btnExpandMap) btnExpandMap.addEventListener("click", openMap);
-  if (btnMapClose) btnMapClose.addEventListener("click", closeMap);
-
-  // Close modals by clicking overlay (background)
-  function closeOnOverlayClick(modalEl, closeFn) {
-    if (!modalEl) return;
-    modalEl.addEventListener("click", (e) => {
-      // only close if click on backdrop (modal container itself), not inside content
-      if (e.target === modalEl || (e.target && e.target.classList && e.target.classList.contains("bg-slate-900/40"))) {
-        closeFn();
+      function safeJSONParse(value, fallback) {
+        try {
+          return JSON.parse(value);
+        } catch {
+          return fallback;
+        }
       }
-    });
-  }
 
-  closeOnOverlayClick(modalSettings, closeSettings);
-  closeOnOverlayClick(modalCategory, closeCategory);
-  closeOnOverlayClick(modalMap, closeMap);
+      // ========= Theme =========
+      (function initTheme() {
+        const saved = localStorage.getItem("lpk_theme");
+        if (saved === "dark") document.documentElement.classList.add("dark");
+        if (saved === "light") document.documentElement.classList.remove("dark");
+      })();
 
-  // --------- Year select demo action (keeps UI intact) ----------
-  const yearSelect = document.getElementById("year-select");
-  if (yearSelect) {
-    yearSelect.addEventListener("change", () => {
-      // Demo-only: no chart data available; keep UX feedback minimal
-      // (No alert to avoid annoying; could add toast later)
-    });
-  }
+      function toggleTheme() {
+        const isDark = document.documentElement.classList.toggle("dark");
+        localStorage.setItem("lpk_theme", isDark ? "dark" : "light");
+      }
 
-})();
-</script>
+      // ========= Modal System =========
+      const modalRoot = $("#modalRoot");
+      const modalBody = $("#modalBody");
+      const modalSubtitle = $("#modalSubtitle");
+      const modalClose = $("#modalClose");
+      const modalBackdrop = $("#modalBackdrop");
 
-</body></html>
+      const MODALS = {
+        modalLogin: { tpl: "tplLogin", subtitle: "Masuk ke akun Anda" },
+        modalDashboard: { tpl: "tplDashboard", subtitle: "Demo Dashboard" },
+        modalBantuan: { tpl: "tplBantuan", subtitle: "Panduan penggunaan" },
+        modalTentang: { tpl: "tplTentang", subtitle: "Tentang layanan" },
+        modalTerms: { tpl: "tplTerms", subtitle: "Ketentuan layanan" },
+        modalPrivacy: { tpl: "tplPrivacy", subtitle: "Kebijakan privasi" },
+        modalContact: { tpl: "tplContact", subtitle: "Kontak desa" },
+      };
+
+      function openModal(key) {
+        const spec = MODALS[key];
+        if (!spec) return;
+
+        const tpl = document.getElementById(spec.tpl);
+        if (!tpl) return;
+
+        modalSubtitle.textContent = spec.subtitle || "—";
+        modalBody.innerHTML = "";
+        modalBody.appendChild(tpl.content.cloneNode(true));
+
+        modalRoot.classList.remove("hidden");
+        document.body.classList.add("overflow-hidden");
+
+        wireModal(key);
+      }
+
+      function closeModal() {
+        modalRoot.classList.add("hidden");
+        document.body.classList.remove("overflow-hidden");
+        modalBody.innerHTML = "";
+      }
+
+      modalClose.addEventListener("click", closeModal);
+      modalBackdrop.addEventListener("click", closeModal);
+
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && !modalRoot.classList.contains("hidden")) closeModal();
+      });
+
+      // Open modal from any element with data-open
+      document.addEventListener("click", (e) => {
+        const opener = e.target.closest("[data-open]");
+        if (opener) {
+          e.preventDefault();
+          openModal(opener.getAttribute("data-open"));
+          setActiveMobile(opener.getAttribute("data-open"));
+          return;
+        }
+
+        const closer = e.target.closest("[data-close]");
+        if (closer) {
+          e.preventDefault();
+          closeModal();
+          window.location.hash = "#register";
+        }
+      });
+
+      // ========= Wire modal actions =========
+      function wireModal(key) {
+        if (key === "modalLogin") {
+          const btnSendOtp = $("#btnSendOtp", modalBody);
+          const btnLogin = $("#btnLogin", modalBody);
+          const btnTheme = $("#btnTheme", modalBody);
+
+          btnSendOtp?.addEventListener("click", () => {
+            toast("OTP terkirim (demo). Gunakan: 123456", "success");
+          });
+
+          btnTheme?.addEventListener("click", () => {
+            toggleTheme();
+          });
+
+          btnLogin?.addEventListener("click", () => {
+            const otp = ($("#otp", modalBody)?.value || "").trim();
+            if (otp !== "123456") {
+              toast("OTP salah. Gunakan OTP demo: 123456", "error");
+              return;
+            }
+            // Simpan session dummy jika belum ada user register
+            const existing = safeJSONParse(localStorage.getItem("lpk_user"), null);
+            if (!existing) {
+              const demoUser = {
+                id: "USR-" + Math.random().toString(16).slice(2, 10).toUpperCase(),
+                role: "warga",
+                full_name: "Warga Demo",
+                nik: null,
+                dusun: "Dusun Mekar Jaya",
+                rt: "001",
+                rw: "002",
+                phone: "+628123456789",
+                createdAt: Date.now(),
+              };
+              localStorage.setItem("lpk_user", JSON.stringify(demoUser));
+            }
+
+            toast("Berhasil masuk. Membuka Dashboard...", "success");
+            openModal("modalDashboard");
+            setActiveMobile("modalDashboard");
+          });
+        }
+
+        if (key === "modalDashboard") {
+          const user = safeJSONParse(localStorage.getItem("lpk_user"), null);
+          const dashName = $("#dashName", modalBody);
+          const dashMeta = $("#dashMeta", modalBody);
+
+          if (user && dashName && dashMeta) {
+            dashName.textContent = user.full_name || "—";
+            dashMeta.textContent = `${user.dusun || "-"} • RT ${user.rt || "-"} / RW ${user.rw || "-"}`;
+          }
+
+          $("#btnToRegister", modalBody)?.addEventListener("click", () => {
+            closeModal();
+            window.location.hash = "#register";
+            setActiveMobile(null);
+          });
+
+          $("#btnLogout", modalBody)?.addEventListener("click", () => {
+            localStorage.removeItem("lpk_user");
+            toast("Anda telah keluar.", "success");
+            closeModal();
+            window.location.hash = "#register";
+            setActiveMobile(null);
+          });
+        }
+      }
+
+      // ========= Register Form =========
+      const registerForm = $("#registerForm");
+      registerForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+
+        const full_name = $("#full_name").value.trim();
+        const nik = $("#nik").value.trim();
+        const dusun = $("#dusun").value;
+        const rt = $("#rt").value.trim();
+        const rw = $("#rw").value.trim();
+        const phone = $("#phone").value.trim();
+
+        // Validasi ringan (tanpa ubah desain)
+        if (!full_name || !dusun || !rt || !rw || !phone) {
+          toast("Mohon lengkapi data yang wajib.", "error");
+          return;
+        }
+
+        // Simpan user ke localStorage
+        const user = {
+          id: "USR-" + Math.random().toString(16).slice(2, 10).toUpperCase(),
+          role: "warga",
+          full_name,
+          nik: nik || null,
+          dusun,
+          rt,
+          rw,
+          phone: "+62" + phone.replace(/^0+/, ""),
+          createdAt: Date.now(),
+        };
+
+        localStorage.setItem("lpk_user", JSON.stringify(user));
+        toast("Registrasi berhasil. Membuka Dashboard...", "success");
+
+        openModal("modalDashboard");
+        setActiveMobile("modalDashboard");
+      });
+
+      // ========= Mobile nav active state =========
+      const navRegister = $("#navRegister");
+      const navLogin = $("#navLogin");
+      const navHelp = $("#navHelp");
+
+      function resetMobile() {
+        if (!navRegister || !navLogin || !navHelp) return;
+        navRegister.className = "flex flex-col items-center gap-1 text-slate-400";
+        navRegister.querySelector("span:last-child").className = "text-[10px] font-medium";
+        navLogin.className = "flex flex-col items-center gap-1 text-slate-400";
+        navLogin.querySelector("span:last-child").className = "text-[10px] font-medium";
+        navHelp.className = "flex flex-col items-center gap-1 text-slate-400";
+        navHelp.querySelector("span:last-child").className = "text-[10px] font-medium";
+      }
+
+      function setPrimary(el) {
+        if (!el) return;
+        el.className = "flex flex-col items-center gap-1 text-primary";
+        const label = el.querySelector("span:last-child");
+        if (label) label.className = "text-[10px] font-bold";
+      }
+
+      function setActiveMobile(mode) {
+        resetMobile();
+        // default: register active
+        if (!mode) {
+          setPrimary(navRegister);
+          return;
+        }
+        if (mode === "modalLogin") setPrimary(navLogin);
+        else if (mode === "modalBantuan") setPrimary(navHelp);
+        else if (mode === "modalDashboard") setPrimary(navRegister); // tetap register sebagai home
+        else setPrimary(navRegister);
+      }
+
+      // Hash routing (simple)
+      function onHash() {
+        const h = (window.location.hash || "#register").toLowerCase();
+
+        if (h === "#login") {
+          openModal("modalLogin");
+          setActiveMobile("modalLogin");
+          return;
+        }
+        if (h === "#bantuan") {
+          openModal("modalBantuan");
+          setActiveMobile("modalBantuan");
+          return;
+        }
+        if (h === "#tentang") {
+          openModal("modalTentang");
+          setActiveMobile(null);
+          return;
+        }
+        if (h === "#terms") {
+          openModal("modalTerms");
+          setActiveMobile(null);
+          return;
+        }
+        if (h === "#privacy") {
+          openModal("modalPrivacy");
+          setActiveMobile(null);
+          return;
+        }
+        if (h === "#contact") {
+          openModal("modalContact");
+          setActiveMobile(null);
+          return;
+        }
+
+        // default: close modal and stay in register view
+        if (!modalRoot.classList.contains("hidden")) closeModal();
+        setActiveMobile(null);
+      }
+
+      window.addEventListener("hashchange", onHash);
+
+      // Init
+      (function init() {
+        // Default active nav on load
+        setActiveMobile(null);
+
+        // Auto open dashboard if already registered (optional, demo-friendly)
+        const user = safeJSONParse(localStorage.getItem("lpk_user"), null);
+        if (user && !window.location.hash) {
+          // tetap di register page, tapi tombol sudah terhubung—tidak memaksa
+          // kamu bisa uncomment kalau mau auto-open dashboard:
+          // openModal("modalDashboard");
+        }
+
+        // If user opens with specific hash
+        if (window.location.hash) onHash();
+      })();
+    </script>
+  </body>
+</html>
