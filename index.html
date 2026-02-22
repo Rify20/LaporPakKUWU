@@ -1,21 +1,18 @@
 <!DOCTYPE html>
-<html class="light" lang="id">
+<html class="light" lang="en">
   <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>Registrasi Warga Baru LPK - Lapor Pak Kuwu</title>
+    <title>Lapor Pak Kuwu - Admin Analytics Dashboard</title>
 
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+
     <link
-      href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700;800;900&amp;display=swap"
+      href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700;800;900&display=swap"
       rel="stylesheet"
     />
     <link
-      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap"
-      rel="stylesheet"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
       rel="stylesheet"
     />
 
@@ -47,781 +44,438 @@
       body {
         font-family: "Public Sans", sans-serif;
       }
-      .form-input-focus:focus {
-        border-color: #137fec;
-        ring: 2px;
-        ring-color: rgba(19, 127, 236, 0.2);
-      }
-      .custom-select-icon {
-        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
-        background-position: right 0.5rem center;
-        background-repeat: no-repeat;
-        background-size: 1.5em 1.5em;
-        padding-right: 2.5rem;
-        -webkit-appearance: none;
-        -moz-appearance: none;
-        appearance: none;
-      }
-
-      /* Tiny motion – tidak mengubah layout/desain */
-      @media (prefers-reduced-motion: no-preference) {
-        .modal-enter {
-          animation: modalIn 160ms ease-out;
-        }
-        @keyframes modalIn {
-          from {
-            opacity: 0;
-            transform: translateY(8px) scale(0.99);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0) scale(1);
-          }
-        }
-      }
     </style>
+
+    <!-- App logic (defer biar DOM siap) -->
+    <script defer src="./app.js"></script>
   </head>
 
-  <body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen flex flex-col">
-    <!-- Top Navigation Bar -->
-    <header class="w-full bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 sticky top-0 z-50">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex justify-between items-center h-16">
-          <!-- Logo -->
-          <div class="flex items-center gap-2">
-            <div class="p-1.5 bg-primary rounded-lg">
-              <svg class="w-6 h-6 text-white" fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
-                <path
-                  d="M36.7273 44C33.9891 44 31.6043 39.8386 30.3636 33.69C29.123 39.8386 26.7382 44 24 44C21.2618 44 18.877 39.8386 17.6364 33.69C16.3957 39.8386 14.0109 44 11.2727 44C7.25611 44 4 35.0457 4 24C4 12.9543 7.25611 4 11.2727 4C14.0109 4 16.3957 8.16144 17.6364 14.31C18.877 8.16144 21.2618 4 24 4C26.7382 4 29.123 8.16144 30.3636 14.31C31.6043 8.16144 33.9891 4 36.7273 4C40.7439 4 44 12.9543 44 24C44 35.0457 40.7439 44 36.7273 44Z"
-                  fill="currentColor"
-                ></path>
-              </svg>
-            </div>
-            <span class="text-xl font-bold tracking-tight text-slate-900 dark:text-white">Lapor Pak Kuwu</span>
+  <body
+    class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 transition-colors duration-200"
+  >
+    <div class="flex h-screen overflow-hidden">
+      <!-- Sidebar Navigation -->
+      <aside
+        class="w-72 bg-white dark:bg-slate-900 border-r border-slate-200 dark:border-slate-800 flex flex-col h-full shrink-0"
+      >
+        <div class="p-6 flex items-center gap-3">
+          <div
+            class="bg-primary size-10 rounded-lg flex items-center justify-center text-white"
+          >
+            <span class="material-symbols-outlined">campaign</span>
           </div>
-
-          <!-- Desktop Nav -->
-          <nav class="hidden md:flex items-center space-x-8">
-            <a
-              class="text-sm font-medium text-slate-600 hover:text-primary dark:text-slate-400 dark:hover:text-primary transition-colors"
-              href="#tentang"
-              data-open="modalTentang"
-              >Tentang Kami</a
+          <div>
+            <h1 class="text-lg font-bold leading-none">Lapor Pak Kuwu</h1>
+            <p
+              class="text-xs text-slate-500 mt-1 uppercase tracking-widest font-semibold"
             >
-            <a
-              class="text-sm font-medium text-slate-600 hover:text-primary dark:text-slate-400 dark:hover:text-primary transition-colors"
-              href="#bantuan"
-              data-open="modalBantuan"
-              >Bantuan</a
-            >
-            <a
-              class="inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-bold rounded-lg text-white bg-primary hover:bg-blue-600 transition-all shadow-sm"
-              href="#login"
-              data-open="modalLogin"
-            >
-              Masuk
-            </a>
-          </nav>
+              Admin Panel
+            </p>
+          </div>
         </div>
-      </div>
-    </header>
 
-    <main class="flex-grow flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8" id="register">
-      <div class="max-w-md w-full space-y-8">
-        <!-- Form Card -->
-        <div class="bg-white dark:bg-slate-900 shadow-xl rounded-xl p-8 border border-slate-100 dark:border-slate-800">
-          <!-- Header Title -->
-          <div class="text-center mb-8">
-            <h2 class="text-3xl font-black text-slate-900 dark:text-white tracking-tight">Registrasi Warga Baru</h2>
-            <p class="mt-2 text-sm text-slate-500 dark:text-slate-400">
-              Silakan lengkapi data diri Anda untuk bergabung dengan layanan pelaporan desa terpadu.
+        <nav class="flex-1 px-4 space-y-1">
+          <a
+            class="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-primary/10 text-primary font-semibold"
+            href="#"
+          >
+            <span class="material-symbols-outlined">dashboard</span>
+            <span>Dashboard</span>
+          </a>
+          <a
+            class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors"
+            href="#"
+          >
+            <span class="material-symbols-outlined">description</span>
+            <span>All Reports</span>
+          </a>
+          <a
+            class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors"
+            href="#"
+          >
+            <span class="material-symbols-outlined">group</span>
+            <span>Citizens</span>
+          </a>
+          <a
+            class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors"
+            href="#"
+          >
+            <span class="material-symbols-outlined">map</span>
+            <span>Village Map</span>
+          </a>
+
+          <div class="pt-4 pb-2">
+            <p
+              class="px-3 text-[10px] font-bold text-slate-400 uppercase tracking-wider"
+            >
+              Analysis
             </p>
           </div>
 
-          <form id="registerForm" action="#" class="space-y-5" method="POST" novalidate>
-            <!-- Nama Lengkap -->
-            <div>
-              <label class="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-1.5" for="full_name"
-                >Nama Lengkap</label
-              >
-              <div class="relative">
-                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <span class="material-symbols-outlined text-slate-400 text-lg">person</span>
-                </div>
-                <input
-                  class="block w-full pl-10 pr-3 py-3 border border-slate-300 dark:border-slate-700 rounded-lg bg-white dark:bg-slate-800 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-sm"
-                  id="full_name"
-                  name="full_name"
-                  placeholder="Contoh: Budi Santoso"
-                  required
-                  type="text"
-                />
-              </div>
-            </div>
+          <a
+            class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors"
+            href="#"
+          >
+            <span class="material-symbols-outlined">monitoring</span>
+            <span>Performance</span>
+          </a>
+          <a
+            class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors"
+            href="#"
+          >
+            <span class="material-symbols-outlined">assessment</span>
+            <span>Demographics</span>
+          </a>
+        </nav>
 
-            <!-- NIK -->
-            <div>
-              <div class="flex justify-between">
-                <label class="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-1.5" for="nik">NIK</label>
-                <span
-                  class="text-[10px] font-medium text-slate-400 uppercase tracking-wider bg-slate-100 dark:bg-slate-800 px-1.5 py-0.5 rounded"
-                  >Opsional</span
-                >
-              </div>
-              <div class="relative">
-                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <span class="material-symbols-outlined text-slate-400 text-lg">badge</span>
-                </div>
-                <input
-                  class="block w-full pl-10 pr-3 py-3 border border-slate-300 dark:border-slate-700 rounded-lg bg-white dark:bg-slate-800 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-sm"
-                  id="nik"
-                  maxlength="16"
-                  name="nik"
-                  placeholder="Masukkan 16 digit NIK"
-                  type="text"
-                  inputmode="numeric"
-                />
-              </div>
-            </div>
+        <div class="p-4 border-t border-slate-200 dark:border-slate-800">
+          <button
+            class="flex items-center gap-3 w-full px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors mb-2"
+            type="button"
+            id="btnSettings"
+          >
+            <span class="material-symbols-outlined">settings</span>
+            <span>Settings</span>
+          </button>
 
-            <!-- Dusun -->
-            <div>
-              <label class="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-1.5" for="dusun">Dusun</label>
-              <div class="relative">
-                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <span class="material-symbols-outlined text-slate-400 text-lg">location_home</span>
-                </div>
-                <select
-                  class="custom-select-icon block w-full pl-10 pr-3 py-3 border border-slate-300 dark:border-slate-700 rounded-lg bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-sm"
-                  id="dusun"
-                  name="dusun"
-                  required
-                >
-                  <option disabled selected value="">Pilih Dusun</option>
-                  <option value="Dusun Mekar Jaya">Dusun Mekar Jaya</option>
-                  <option value="Dusun Sari Mulya">Dusun Sari Mulya</option>
-                  <option value="Dusun Wangi Harja">Dusun Wangi Harja</option>
-                </select>
-              </div>
-            </div>
-
-            <!-- RT/RW Row -->
-            <div class="grid grid-cols-2 gap-4">
-              <div>
-                <label class="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-1.5" for="rt">RT</label>
-                <input
-                  class="block w-full px-3 py-3 border border-slate-300 dark:border-slate-700 rounded-lg bg-white dark:bg-slate-800 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-sm text-center"
-                  id="rt"
-                  name="rt"
-                  placeholder="001"
-                  required
-                  type="text"
-                  inputmode="numeric"
-                />
-              </div>
-              <div>
-                <label class="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-1.5" for="rw">RW</label>
-                <input
-                  class="block w-full px-3 py-3 border border-slate-300 dark:border-slate-700 rounded-lg bg-white dark:bg-slate-800 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-sm text-center"
-                  id="rw"
-                  name="rw"
-                  placeholder="002"
-                  required
-                  type="text"
-                  inputmode="numeric"
-                />
-              </div>
-            </div>
-
-            <!-- No HP -->
-            <div>
-              <label class="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-1.5" for="phone"
-                >Nomor Handphone (WA)</label
-              >
-              <div class="flex">
-                <span
-                  class="inline-flex items-center px-4 rounded-l-lg border border-r-0 border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-500 dark:text-slate-400 text-sm"
-                >
-                  +62
-                </span>
-                <input
-                  class="block w-full px-3 py-3 border border-slate-300 dark:border-slate-700 rounded-r-lg bg-white dark:bg-slate-800 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-sm"
-                  id="phone"
-                  name="phone"
-                  placeholder="8123456789"
-                  required
-                  type="tel"
-                  inputmode="tel"
-                />
-              </div>
-            </div>
-
-            <!-- Submit Button -->
-            <div class="pt-4">
-              <button
-                class="w-full flex items-center justify-center px-4 py-4 border border-transparent rounded-lg shadow-sm text-base font-bold text-white bg-primary hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary transition-all transform active:scale-[0.98]"
-                type="submit"
-              >
-                Daftar Sekarang
-              </button>
-            </div>
-
-            <!-- Login Link -->
-            <div class="text-center mt-6">
-              <p class="text-sm text-slate-600 dark:text-slate-400">
-                Sudah punya akun?
-                <a class="font-bold text-primary hover:text-blue-700 transition-colors" href="#login" data-open="modalLogin"
-                  >Masuk</a
-                >
+          <div
+            class="flex items-center gap-3 p-2 bg-slate-100 dark:bg-slate-800 rounded-xl"
+          >
+            <div
+              class="size-10 rounded-lg bg-slate-300 overflow-hidden"
+              data-alt="Admin user profile picture portrait"
+              style="
+                background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDu89xWEL9XN81x3a-QKXZGg82OLORb8Ui1gVith46Lw4KlgdVfMtsAPshOHaY1u5sNcVKnFI8BvmlA0z_C8UQYgZE8in-bhjVHRxhvRq3GxX93p1-vyAfgG2RepqL302GN5civ-5ognZ8oBrg8A_T_JAWr-gxKyTor9zV0usNzq9jLXchJiwTuUgi4QTf_aTfxoR4PrlNum9SVfqSA4ikAyZfMe2BJnJKzUoLMAa5O1Fi0PChd6gWWoqwZ59aIHOB5Ru2ughNgJkc');
+                background-size: cover;
+              "
+            ></div>
+            <div class="flex-1 overflow-hidden">
+              <p class="text-sm font-bold truncate" id="adminName">
+                Ahmad Subarjo
+              </p>
+              <p class="text-[10px] text-slate-500 truncate" id="adminRole">
+                Village Head (Kuwu)
               </p>
             </div>
-          </form>
+          </div>
         </div>
+      </aside>
 
-        <!-- Additional Links / Footer -->
-        <div class="flex justify-center space-x-6 text-xs text-slate-400 dark:text-slate-600 pb-8">
-          <a class="hover:text-slate-600 dark:hover:text-slate-400 transition-colors" href="#terms" data-open="modalTerms"
-            >Ketentuan Layanan</a
-          >
-          <a class="hover:text-slate-600 dark:hover:text-slate-400 transition-colors" href="#privacy" data-open="modalPrivacy"
-            >Kebijakan Privasi</a
-          >
-          <a class="hover:text-slate-600 dark:hover:text-slate-400 transition-colors" href="#contact" data-open="modalContact"
-            >Hubungi Kami</a
-          >
-        </div>
-      </div>
-    </main>
-
-    <!-- Mobile Navigation Bar -->
-    <div
-      class="md:hidden fixed bottom-6 left-1/2 -translate-x-1/2 w-[90%] bg-white/80 dark:bg-slate-900/80 backdrop-blur-lg shadow-2xl rounded-full border border-slate-200 dark:border-slate-800 p-2 flex justify-between items-center px-6 z-50"
-    >
-      <a id="navRegister" href="#register" class="flex flex-col items-center gap-1 text-primary">
-        <span class="material-symbols-outlined text-2xl">person_add</span>
-        <span class="text-[10px] font-bold">Daftar</span>
-      </a>
-
-      <a id="navLogin" href="#login" data-open="modalLogin" class="flex flex-col items-center gap-1 text-slate-400">
-        <span class="material-symbols-outlined text-2xl">login</span>
-        <span class="text-[10px] font-medium">Masuk</span>
-      </a>
-
-      <a id="navHelp" href="#bantuan" data-open="modalBantuan" class="flex flex-col items-center gap-1 text-slate-400">
-        <span class="material-symbols-outlined text-2xl">help</span>
-        <span class="text-[10px] font-medium">Bantuan</span>
-      </a>
-    </div>
-
-    <!-- ===== Modals (tanpa merusak desain utama) ===== -->
-    <div id="modalRoot" class="hidden fixed inset-0 z-[9999]">
-      <div id="modalBackdrop" class="absolute inset-0 bg-slate-900/50 backdrop-blur-sm"></div>
-
-      <div class="relative min-h-screen flex items-center justify-center p-4">
-        <!-- Modal Card -->
-        <div
-          id="modalCard"
-          class="modal-enter w-full max-w-md bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-xl shadow-2xl overflow-hidden"
-          role="dialog"
-          aria-modal="true"
-          aria-labelledby="modalTitle"
+      <!-- Main Content -->
+      <main class="flex-1 overflow-y-auto bg-background-light dark:bg-background-dark">
+        <!-- Header -->
+        <header
+          class="sticky top-0 z-10 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 px-8 py-4 flex items-center justify-between"
         >
-          <!-- Modal Header -->
-          <div class="flex items-center justify-between px-6 py-4 border-b border-slate-100 dark:border-slate-800">
-            <div class="flex items-center gap-2">
-              <div class="p-1.5 bg-primary rounded-lg">
-                <svg class="w-5 h-5 text-white" fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
-                  <path
-                    d="M36.7273 44C33.9891 44 31.6043 39.8386 30.3636 33.69C29.123 39.8386 26.7382 44 24 44C21.2618 44 18.877 39.8386 17.6364 33.69C16.3957 39.8386 14.0109 44 11.2727 44C7.25611 44 4 35.0457 4 24C4 12.9543 7.25611 4 11.2727 4C14.0109 4 16.3957 8.16144 17.6364 14.31C18.877 8.16144 21.2618 4 24 4C26.7382 4 29.123 8.16144 30.3636 14.31C31.6043 8.16144 33.9891 4 36.7273 4C40.7439 4 44 12.9543 44 24C44 35.0457 40.7439 44 36.7273 44Z"
-                    fill="currentColor"
-                  ></path>
-                </svg>
-              </div>
-              <div>
-                <div id="modalTitle" class="text-sm font-black text-slate-900 dark:text-white tracking-tight">
-                  Lapor Pak Kuwu
-                </div>
-                <div id="modalSubtitle" class="text-[11px] text-slate-500 dark:text-slate-400">—</div>
-              </div>
+          <div>
+            <h2 class="text-xl font-bold tracking-tight">Village Analytics Overview</h2>
+            <p class="text-xs text-slate-500">Monitoring real-time community reports</p>
+          </div>
+
+          <div class="flex items-center gap-4">
+            <div class="relative">
+              <span
+                class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-lg"
+                >search</span
+              >
+              <input
+                id="searchInput"
+                class="pl-10 pr-4 py-2 bg-slate-100 dark:bg-slate-800 border-none rounded-lg text-sm w-64 focus:ring-2 focus:ring-primary transition-all"
+                placeholder="Search reports..."
+                type="text"
+                autocomplete="off"
+              />
             </div>
 
             <button
-              id="modalClose"
-              class="w-10 h-10 rounded-lg border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 hover:text-primary hover:border-primary transition flex items-center justify-center"
-              aria-label="Tutup"
+              class="p-2 bg-slate-100 dark:bg-slate-800 rounded-lg text-slate-600 dark:text-slate-400 relative"
+              type="button"
+              id="btnNotifications"
+              aria-label="Notifications"
             >
-              <span class="material-symbols-outlined text-xl">close</span>
+              <span class="material-symbols-outlined">notifications</span>
+              <span
+                id="notifDot"
+                class="absolute top-1.5 right-1.5 size-2 bg-red-500 rounded-full border-2 border-white dark:border-slate-800"
+              ></span>
+            </button>
+
+            <button
+              class="flex items-center gap-2 px-4 py-2 bg-primary text-white text-sm font-bold rounded-lg hover:bg-primary/90 transition-all"
+              type="button"
+              id="btnExport"
+            >
+              <span class="material-symbols-outlined text-[18px]">download</span>
+              Export Data
             </button>
           </div>
+        </header>
 
-          <!-- Modal Body -->
-          <div id="modalBody" class="p-6"></div>
-        </div>
-      </div>
-    </div>
+        <div class="p-8 space-y-8">
+          <!-- KPI Section -->
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <!-- Total Reports -->
+            <div
+              class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm"
+            >
+              <div class="flex justify-between items-start mb-4">
+                <div class="p-2 bg-blue-50 dark:bg-blue-900/20 rounded-lg text-primary">
+                  <span class="material-symbols-outlined">fact_check</span>
+                </div>
+                <span
+                  id="kpiTotalDelta"
+                  class="text-xs font-bold text-green-500 bg-green-50 dark:bg-green-900/20 px-2 py-1 rounded"
+                  >+0.0%</span
+                >
+              </div>
+              <p class="text-slate-500 text-xs font-bold uppercase tracking-wider">
+                Total Reports
+              </p>
+              <h3 class="text-2xl font-black mt-1" id="kpiTotalValue">0</h3>
+              <p class="text-[10px] text-slate-400 mt-2" id="kpiTotalNote">
+                vs 0 last month
+              </p>
+            </div>
 
-    <!-- ===== Templates (konten modal) ===== -->
-    <template id="tplLogin">
-      <div class="space-y-4">
-        <div class="text-center">
-          <h3 class="text-2xl font-black text-slate-900 dark:text-white tracking-tight">Masuk</h3>
-          <p class="mt-1 text-sm text-slate-500 dark:text-slate-400">Masuk menggunakan nomor HP/email (demo).</p>
-        </div>
+            <!-- Pending Tasks -->
+            <div
+              class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm"
+            >
+              <div class="flex justify-between items-start mb-4">
+                <div
+                  class="p-2 bg-orange-50 dark:bg-orange-900/20 rounded-lg text-orange-600"
+                >
+                  <span class="material-symbols-outlined">pending_actions</span>
+                </div>
+                <span
+                  id="kpiPendingDelta"
+                  class="text-xs font-bold text-red-500 bg-red-50 dark:bg-red-900/20 px-2 py-1 rounded"
+                  >0.0%</span
+                >
+              </div>
+              <p class="text-slate-500 text-xs font-bold uppercase tracking-wider">
+                Pending Tasks
+              </p>
+              <h3 class="text-2xl font-black mt-1" id="kpiPendingValue">0</h3>
+              <p class="text-[10px] text-slate-400 mt-2" id="kpiPendingNote">
+                Critical urgency level
+              </p>
+            </div>
 
-        <div>
-          <label class="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-1.5" for="login_id"
-            >Nomor HP / Email</label
-          >
-          <input
-            id="login_id"
-            class="block w-full px-3 py-3 border border-slate-300 dark:border-slate-700 rounded-lg bg-white dark:bg-slate-800 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-sm"
-            placeholder="contoh: 812xxxx / nama@email.com"
-            type="text"
-          />
-        </div>
+            <!-- Resolved Issues -->
+            <div
+              class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm"
+            >
+              <div class="flex justify-between items-start mb-4">
+                <div
+                  class="p-2 bg-green-50 dark:bg-green-900/20 rounded-lg text-green-600"
+                >
+                  <span class="material-symbols-outlined">task_alt</span>
+                </div>
+                <span
+                  id="kpiResolvedDelta"
+                  class="text-xs font-bold text-green-500 bg-green-50 dark:bg-green-900/20 px-2 py-1 rounded"
+                  >0.0%</span
+                >
+              </div>
+              <p class="text-slate-500 text-xs font-bold uppercase tracking-wider">
+                Resolved Issues
+              </p>
+              <h3 class="text-2xl font-black mt-1" id="kpiResolvedValue">0</h3>
+              <p class="text-[10px] text-slate-400 mt-2" id="kpiResolvedNote">
+                0.0% success rate
+              </p>
+            </div>
 
-        <div class="grid grid-cols-2 gap-3">
-          <button
-            id="btnSendOtp"
-            class="flex items-center justify-center px-4 py-3 rounded-lg border border-slate-200 dark:border-slate-700 text-sm font-bold text-slate-700 dark:text-slate-200 hover:border-primary hover:text-primary transition-all"
-            type="button"
-          >
-            Kirim OTP
-          </button>
-          <button
-            id="btnTheme"
-            class="flex items-center justify-center px-4 py-3 rounded-lg border border-slate-200 dark:border-slate-700 text-sm font-bold text-slate-700 dark:text-slate-200 hover:border-primary hover:text-primary transition-all"
-            type="button"
-            title="Toggle Dark Mode"
-          >
-            Toggle Dark
-          </button>
-        </div>
+            <!-- Avg. Response Time -->
+            <div
+              class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm"
+            >
+              <div class="flex justify-between items-start mb-4">
+                <div
+                  class="p-2 bg-purple-50 dark:bg-purple-900/20 rounded-lg text-purple-600"
+                >
+                  <span class="material-symbols-outlined">schedule</span>
+                </div>
+                <span
+                  id="kpiRespDelta"
+                  class="text-xs font-bold text-green-500 bg-green-50 dark:bg-green-900/20 px-2 py-1 rounded"
+                  >0.0%</span
+                >
+              </div>
+              <p class="text-slate-500 text-xs font-bold uppercase tracking-wider">
+                Avg. Response Time
+              </p>
+              <h3 class="text-2xl font-black mt-1" id="kpiRespValue">0 Days</h3>
+              <p class="text-[10px] text-slate-400 mt-2" id="kpiRespNote">
+                Improved from 0 days
+              </p>
+            </div>
+          </div>
 
-        <div>
-          <label class="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-1.5" for="otp"
-            >OTP (demo: 123456)</label
-          >
-          <input
-            id="otp"
-            class="block w-full px-3 py-3 border border-slate-300 dark:border-slate-700 rounded-lg bg-white dark:bg-slate-800 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-sm tracking-[0.35em] text-center"
-            placeholder="••••••"
-            type="text"
-            inputmode="numeric"
-            maxlength="6"
-          />
-        </div>
+          <!-- Charts Section -->
+          <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <!-- Main Trend Chart -->
+            <div
+              class="lg:col-span-2 bg-white dark:bg-slate-900 p-8 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm"
+            >
+              <div class="flex items-center justify-between mb-8">
+                <div>
+                  <h4 class="text-lg font-bold">Monthly Report Trend</h4>
+                  <p class="text-sm text-slate-500">
+                    Volume of reports received over the last 6 months
+                  </p>
+                </div>
+                <select
+                  id="yearSelect"
+                  class="text-sm bg-slate-50 dark:bg-slate-800 border-slate-200 dark:border-slate-700 rounded-lg"
+                >
+                  <option value="2024" selected>2024</option>
+                  <option value="2023">2023</option>
+                </select>
+              </div>
 
-        <button
-          id="btnLogin"
-          class="w-full flex items-center justify-center px-4 py-4 border border-transparent rounded-lg shadow-sm text-base font-bold text-white bg-primary hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary transition-all transform active:scale-[0.98]"
-          type="button"
-        >
-          Masuk
-        </button>
+              <div class="h-64 relative">
+                <svg class="w-full h-full" preserveAspectRatio="none" viewBox="0 0 100 40">
+                  <defs>
+                    <linearGradient id="gradientTrend" x1="0" x2="0" y1="0" y2="1">
+                      <stop offset="0%" stop-color="#137fec" stop-opacity="0.2"></stop>
+                      <stop offset="100%" stop-color="#137fec" stop-opacity="0"></stop>
+                    </linearGradient>
+                  </defs>
 
-        <div class="text-center text-sm text-slate-600 dark:text-slate-400">
-          Belum punya akun?
-          <a class="font-bold text-primary hover:text-blue-700 transition-colors" href="#register" data-close>Daftar</a>
-        </div>
-      </div>
-    </template>
+                  <!-- JS akan ganti path d="" sesuai data -->
+                  <path id="trendArea" d="" fill="url(#gradientTrend)"></path>
+                  <path id="trendLine" d="" fill="none" stroke="#137fec" stroke-width="0.5"></path>
+                </svg>
 
-    <template id="tplDashboard">
-      <div class="space-y-4">
-        <div class="text-center">
-          <h3 class="text-2xl font-black text-slate-900 dark:text-white tracking-tight">Dashboard (Demo)</h3>
-          <p class="mt-1 text-sm text-slate-500 dark:text-slate-400">
-            Ini mode percobaan single-file untuk GitHub. Data pengguna tersimpan di browser Anda.
-          </p>
-        </div>
+                <div
+                  id="trendMonths"
+                  class="flex justify-between mt-4 text-[10px] font-bold text-slate-400 uppercase tracking-tighter"
+                ></div>
+              </div>
+            </div>
 
-        <div class="rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800/40 p-4">
-          <div class="flex items-start gap-3">
-            <span class="material-symbols-outlined text-primary">account_circle</span>
-            <div class="min-w-0">
-              <div class="text-sm font-bold text-slate-900 dark:text-white" id="dashName">—</div>
-              <div class="text-xs text-slate-500 dark:text-slate-400" id="dashMeta">—</div>
+            <!-- Category Distribution -->
+            <div
+              class="bg-white dark:bg-slate-900 p-8 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm"
+            >
+              <h4 class="text-lg font-bold mb-6">Reports per Category</h4>
+
+              <div class="space-y-6" id="categoryList">
+                <!-- JS render bars -->
+              </div>
+
+              <div class="mt-8 pt-6 border-t border-slate-100 dark:border-slate-800">
+                <button
+                  class="w-full py-2.5 text-xs font-bold text-primary hover:bg-primary/5 rounded-lg transition-colors"
+                  type="button"
+                  id="btnCategoryBreakdown"
+                >
+                  View Category Breakdown
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Recent Activity & Map -->
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <!-- Recent Reports -->
+            <div
+              class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden"
+            >
+              <div
+                class="p-6 border-b border-slate-200 dark:border-slate-800 flex justify-between items-center"
+              >
+                <h4 class="text-lg font-bold">Recent Reports</h4>
+                <a class="text-xs font-bold text-primary hover:underline" href="#"
+                  >View All</a
+                >
+              </div>
+
+              <div class="overflow-x-auto">
+                <table class="w-full text-left">
+                  <thead
+                    class="bg-slate-50 dark:bg-slate-800/50 text-[10px] font-bold uppercase tracking-wider text-slate-500"
+                  >
+                    <tr>
+                      <th class="px-6 py-3">Reported Issue</th>
+                      <th class="px-6 py-3">Reporter</th>
+                      <th class="px-6 py-3">Status</th>
+                      <th class="px-6 py-3">Date</th>
+                    </tr>
+                  </thead>
+
+                  <tbody
+                    id="recentReportsBody"
+                    class="divide-y divide-slate-100 dark:divide-slate-800 text-sm"
+                  >
+                    <!-- JS render rows -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <!-- Map/Location Focus (tetap seperti kamu) -->
+            <div
+              class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden flex flex-col"
+            >
+              <div class="p-6 border-b border-slate-200 dark:border-slate-800">
+                <h4 class="text-lg font-bold">Report Heatmap</h4>
+                <p class="text-xs text-slate-500">
+                  Geographic distribution of reported issues
+                </p>
+              </div>
+
+              <div class="flex-1 bg-slate-200 dark:bg-slate-800 relative group overflow-hidden">
+                <div
+                  class="absolute inset-0 bg-cover bg-center transition-transform group-hover:scale-105"
+                  data-alt="Satellite map view of a village area with report pin indicators"
+                  data-location="West Java Village Area"
+                  style="
+                    background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDc92CVVDtybgxNZl01yYE5_Awc9hXIg-WNAMGsjJMI0VFEg_52pAWSDRtKqTWR5Z-iCEsFNzUvb1Lv6sN603IkQliYSO5SA6Ud9blhARcr1jRx-1lk3SCD3iWMi1-ms46818XbIcoKP70GaFrcKKNf62eF8iUoVah41N1Yq2FRjr2tKo694ZURyHAkTV2O6-NND-rFCftxS4f8zaltG3j2338ZApHSmLiOF7q-nrulZs8VV2abioDithhzn3vDPjiuY8O1TL2N21Y');
+                  "
+                ></div>
+
+                <div class="absolute inset-0 bg-primary/10 pointer-events-none"></div>
+
+                <div class="absolute top-1/4 left-1/3 size-4 bg-red-500 rounded-full border-2 border-white animate-pulse"></div>
+                <div class="absolute top-1/2 left-1/2 size-4 bg-primary rounded-full border-2 border-white"></div>
+                <div class="absolute bottom-1/4 right-1/4 size-4 bg-green-500 rounded-full border-2 border-white"></div>
+
+                <div
+                  class="absolute bottom-4 left-4 right-4 bg-white/90 dark:bg-slate-900/90 backdrop-blur-sm p-3 rounded-lg border border-slate-200 dark:border-slate-800 shadow-lg flex items-center justify-between"
+                >
+                  <div class="flex items-center gap-2">
+                    <span class="material-symbols-outlined text-primary">location_on</span>
+                    <div>
+                      <p class="text-xs font-bold" id="villageName">Desa Maju Jaya</p>
+                      <p class="text-[10px] text-slate-500" id="villageArea">
+                        Kecamatan Sukamakmur
+                      </p>
+                    </div>
+                  </div>
+                  <button
+                    class="px-3 py-1.5 bg-primary text-white text-[10px] font-bold rounded-lg uppercase"
+                    type="button"
+                    id="btnExpandMap"
+                  >
+                    Expand Map
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
         </div>
 
-        <div class="grid grid-cols-2 gap-3">
-          <button
-            id="btnToRegister"
-            class="flex items-center justify-center px-4 py-3 rounded-lg border border-slate-200 dark:border-slate-700 text-sm font-bold text-slate-700 dark:text-slate-200 hover:border-primary hover:text-primary transition-all"
-            type="button"
-          >
-            Kembali
-          </button>
-          <button
-            id="btnLogout"
-            class="flex items-center justify-center px-4 py-3 rounded-lg border border-transparent text-sm font-bold text-white bg-primary hover:bg-blue-600 transition-all"
-            type="button"
-          >
-            Keluar
-          </button>
-        </div>
-      </div>
-    </template>
-
-    <template id="tplBantuan">
-      <div class="space-y-3">
-        <h3 class="text-2xl font-black text-slate-900 dark:text-white tracking-tight">Bantuan</h3>
-        <p class="text-sm text-slate-600 dark:text-slate-400">
-          Ini versi demo single-file. Tombol dan navigasi sudah saling terhubung untuk uji coba di GitHub Pages.
-        </p>
-        <ul class="text-sm text-slate-600 dark:text-slate-400 list-disc pl-5 space-y-1">
-          <li>Registrasi menyimpan data ke localStorage.</li>
-          <li>Masuk memakai OTP demo: <span class="font-bold text-slate-900 dark:text-white">123456</span>.</li>
-          <li>Dark mode bisa di-toggle dari modal Masuk.</li>
-        </ul>
-      </div>
-    </template>
-
-    <template id="tplTentang">
-      <div class="space-y-3">
-        <h3 class="text-2xl font-black text-slate-900 dark:text-white tracking-tight">Tentang Kami</h3>
-        <p class="text-sm text-slate-600 dark:text-slate-400">
-          <span class="font-bold text-slate-900 dark:text-white">Lapor Pak Kuwu</span> adalah layanan pelaporan desa untuk
-          keluhan, aspirasi, dan kejadian warga secara cepat dan transparan.
-        </p>
-      </div>
-    </template>
-
-    <template id="tplTerms">
-      <div class="space-y-2">
-        <h3 class="text-2xl font-black text-slate-900 dark:text-white tracking-tight">Ketentuan Layanan</h3>
-        <p class="text-sm text-slate-600 dark:text-slate-400">
-          Ini konten placeholder demo. Anda bisa mengganti dengan ketentuan resmi desa.
-        </p>
-      </div>
-    </template>
-
-    <template id="tplPrivacy">
-      <div class="space-y-2">
-        <h3 class="text-2xl font-black text-slate-900 dark:text-white tracking-tight">Kebijakan Privasi</h3>
-        <p class="text-sm text-slate-600 dark:text-slate-400">
-          Ini konten placeholder demo. Data demo disimpan lokal di perangkat (localStorage), bukan ke server.
-        </p>
-      </div>
-    </template>
-
-    <template id="tplContact">
-      <div class="space-y-2">
-        <h3 class="text-2xl font-black text-slate-900 dark:text-white tracking-tight">Hubungi Kami</h3>
-        <div class="text-sm text-slate-600 dark:text-slate-400 space-y-1">
-          <div><span class="font-semibold text-slate-900 dark:text-white">Kantor Desa:</span> (contoh) 08xx-xxxx-xxxx</div>
-          <div><span class="font-semibold text-slate-900 dark:text-white">Jam Layanan:</span> Senin–Jumat, 08.00–15.00</div>
-        </div>
-      </div>
-    </template>
-
-    <script>
-      // ========= Utilities =========
-      const $ = (sel, root = document) => root.querySelector(sel);
-      const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
-
-      function toast(msg, type = "info") {
-        const wrap = document.createElement("div");
-        wrap.className =
-          "fixed top-5 left-1/2 -translate-x-1/2 z-[99999] px-4 py-3 rounded-xl shadow-2xl text-sm font-semibold " +
-          (type === "success"
-            ? "bg-emerald-600 text-white"
-            : type === "error"
-            ? "bg-rose-600 text-white"
-            : "bg-slate-900 text-white");
-        wrap.textContent = msg;
-        document.body.appendChild(wrap);
-        setTimeout(() => wrap.remove(), 2200);
-      }
-
-      function safeJSONParse(value, fallback) {
-        try {
-          return JSON.parse(value);
-        } catch {
-          return fallback;
-        }
-      }
-
-      // ========= Theme =========
-      (function initTheme() {
-        const saved = localStorage.getItem("lpk_theme");
-        if (saved === "dark") document.documentElement.classList.add("dark");
-        if (saved === "light") document.documentElement.classList.remove("dark");
-      })();
-
-      function toggleTheme() {
-        const isDark = document.documentElement.classList.toggle("dark");
-        localStorage.setItem("lpk_theme", isDark ? "dark" : "light");
-      }
-
-      // ========= Modal System =========
-      const modalRoot = $("#modalRoot");
-      const modalBody = $("#modalBody");
-      const modalSubtitle = $("#modalSubtitle");
-      const modalClose = $("#modalClose");
-      const modalBackdrop = $("#modalBackdrop");
-
-      const MODALS = {
-        modalLogin: { tpl: "tplLogin", subtitle: "Masuk ke akun Anda" },
-        modalDashboard: { tpl: "tplDashboard", subtitle: "Demo Dashboard" },
-        modalBantuan: { tpl: "tplBantuan", subtitle: "Panduan penggunaan" },
-        modalTentang: { tpl: "tplTentang", subtitle: "Tentang layanan" },
-        modalTerms: { tpl: "tplTerms", subtitle: "Ketentuan layanan" },
-        modalPrivacy: { tpl: "tplPrivacy", subtitle: "Kebijakan privasi" },
-        modalContact: { tpl: "tplContact", subtitle: "Kontak desa" },
-      };
-
-      function openModal(key) {
-        const spec = MODALS[key];
-        if (!spec) return;
-
-        const tpl = document.getElementById(spec.tpl);
-        if (!tpl) return;
-
-        modalSubtitle.textContent = spec.subtitle || "—";
-        modalBody.innerHTML = "";
-        modalBody.appendChild(tpl.content.cloneNode(true));
-
-        modalRoot.classList.remove("hidden");
-        document.body.classList.add("overflow-hidden");
-
-        wireModal(key);
-      }
-
-      function closeModal() {
-        modalRoot.classList.add("hidden");
-        document.body.classList.remove("overflow-hidden");
-        modalBody.innerHTML = "";
-      }
-
-      modalClose.addEventListener("click", closeModal);
-      modalBackdrop.addEventListener("click", closeModal);
-
-      document.addEventListener("keydown", (e) => {
-        if (e.key === "Escape" && !modalRoot.classList.contains("hidden")) closeModal();
-      });
-
-      // Open modal from any element with data-open
-      document.addEventListener("click", (e) => {
-        const opener = e.target.closest("[data-open]");
-        if (opener) {
-          e.preventDefault();
-          openModal(opener.getAttribute("data-open"));
-          setActiveMobile(opener.getAttribute("data-open"));
-          return;
-        }
-
-        const closer = e.target.closest("[data-close]");
-        if (closer) {
-          e.preventDefault();
-          closeModal();
-          window.location.hash = "#register";
-        }
-      });
-
-      // ========= Wire modal actions =========
-      function wireModal(key) {
-        if (key === "modalLogin") {
-          const btnSendOtp = $("#btnSendOtp", modalBody);
-          const btnLogin = $("#btnLogin", modalBody);
-          const btnTheme = $("#btnTheme", modalBody);
-
-          btnSendOtp?.addEventListener("click", () => {
-            toast("OTP terkirim (demo). Gunakan: 123456", "success");
-          });
-
-          btnTheme?.addEventListener("click", () => {
-            toggleTheme();
-          });
-
-          btnLogin?.addEventListener("click", () => {
-            const otp = ($("#otp", modalBody)?.value || "").trim();
-            if (otp !== "123456") {
-              toast("OTP salah. Gunakan OTP demo: 123456", "error");
-              return;
-            }
-            // Simpan session dummy jika belum ada user register
-            const existing = safeJSONParse(localStorage.getItem("lpk_user"), null);
-            if (!existing) {
-              const demoUser = {
-                id: "USR-" + Math.random().toString(16).slice(2, 10).toUpperCase(),
-                role: "warga",
-                full_name: "Warga Demo",
-                nik: null,
-                dusun: "Dusun Mekar Jaya",
-                rt: "001",
-                rw: "002",
-                phone: "+628123456789",
-                createdAt: Date.now(),
-              };
-              localStorage.setItem("lpk_user", JSON.stringify(demoUser));
-            }
-
-            toast("Berhasil masuk. Membuka Dashboard...", "success");
-            openModal("modalDashboard");
-            setActiveMobile("modalDashboard");
-          });
-        }
-
-        if (key === "modalDashboard") {
-          const user = safeJSONParse(localStorage.getItem("lpk_user"), null);
-          const dashName = $("#dashName", modalBody);
-          const dashMeta = $("#dashMeta", modalBody);
-
-          if (user && dashName && dashMeta) {
-            dashName.textContent = user.full_name || "—";
-            dashMeta.textContent = `${user.dusun || "-"} • RT ${user.rt || "-"} / RW ${user.rw || "-"}`;
-          }
-
-          $("#btnToRegister", modalBody)?.addEventListener("click", () => {
-            closeModal();
-            window.location.hash = "#register";
-            setActiveMobile(null);
-          });
-
-          $("#btnLogout", modalBody)?.addEventListener("click", () => {
-            localStorage.removeItem("lpk_user");
-            toast("Anda telah keluar.", "success");
-            closeModal();
-            window.location.hash = "#register";
-            setActiveMobile(null);
-          });
-        }
-      }
-
-      // ========= Register Form =========
-      const registerForm = $("#registerForm");
-      registerForm.addEventListener("submit", (e) => {
-        e.preventDefault();
-
-        const full_name = $("#full_name").value.trim();
-        const nik = $("#nik").value.trim();
-        const dusun = $("#dusun").value;
-        const rt = $("#rt").value.trim();
-        const rw = $("#rw").value.trim();
-        const phone = $("#phone").value.trim();
-
-        // Validasi ringan (tanpa ubah desain)
-        if (!full_name || !dusun || !rt || !rw || !phone) {
-          toast("Mohon lengkapi data yang wajib.", "error");
-          return;
-        }
-
-        // Simpan user ke localStorage
-        const user = {
-          id: "USR-" + Math.random().toString(16).slice(2, 10).toUpperCase(),
-          role: "warga",
-          full_name,
-          nik: nik || null,
-          dusun,
-          rt,
-          rw,
-          phone: "+62" + phone.replace(/^0+/, ""),
-          createdAt: Date.now(),
-        };
-
-        localStorage.setItem("lpk_user", JSON.stringify(user));
-        toast("Registrasi berhasil. Membuka Dashboard...", "success");
-
-        openModal("modalDashboard");
-        setActiveMobile("modalDashboard");
-      });
-
-      // ========= Mobile nav active state =========
-      const navRegister = $("#navRegister");
-      const navLogin = $("#navLogin");
-      const navHelp = $("#navHelp");
-
-      function resetMobile() {
-        if (!navRegister || !navLogin || !navHelp) return;
-        navRegister.className = "flex flex-col items-center gap-1 text-slate-400";
-        navRegister.querySelector("span:last-child").className = "text-[10px] font-medium";
-        navLogin.className = "flex flex-col items-center gap-1 text-slate-400";
-        navLogin.querySelector("span:last-child").className = "text-[10px] font-medium";
-        navHelp.className = "flex flex-col items-center gap-1 text-slate-400";
-        navHelp.querySelector("span:last-child").className = "text-[10px] font-medium";
-      }
-
-      function setPrimary(el) {
-        if (!el) return;
-        el.className = "flex flex-col items-center gap-1 text-primary";
-        const label = el.querySelector("span:last-child");
-        if (label) label.className = "text-[10px] font-bold";
-      }
-
-      function setActiveMobile(mode) {
-        resetMobile();
-        // default: register active
-        if (!mode) {
-          setPrimary(navRegister);
-          return;
-        }
-        if (mode === "modalLogin") setPrimary(navLogin);
-        else if (mode === "modalBantuan") setPrimary(navHelp);
-        else if (mode === "modalDashboard") setPrimary(navRegister); // tetap register sebagai home
-        else setPrimary(navRegister);
-      }
-
-      // Hash routing (simple)
-      function onHash() {
-        const h = (window.location.hash || "#register").toLowerCase();
-
-        if (h === "#login") {
-          openModal("modalLogin");
-          setActiveMobile("modalLogin");
-          return;
-        }
-        if (h === "#bantuan") {
-          openModal("modalBantuan");
-          setActiveMobile("modalBantuan");
-          return;
-        }
-        if (h === "#tentang") {
-          openModal("modalTentang");
-          setActiveMobile(null);
-          return;
-        }
-        if (h === "#terms") {
-          openModal("modalTerms");
-          setActiveMobile(null);
-          return;
-        }
-        if (h === "#privacy") {
-          openModal("modalPrivacy");
-          setActiveMobile(null);
-          return;
-        }
-        if (h === "#contact") {
-          openModal("modalContact");
-          setActiveMobile(null);
-          return;
-        }
-
-        // default: close modal and stay in register view
-        if (!modalRoot.classList.contains("hidden")) closeModal();
-        setActiveMobile(null);
-      }
-
-      window.addEventListener("hashchange", onHash);
-
-      // Init
-      (function init() {
-        // Default active nav on load
-        setActiveMobile(null);
-
-        // Auto open dashboard if already registered (optional, demo-friendly)
-        const user = safeJSONParse(localStorage.getItem("lpk_user"), null);
-        if (user && !window.location.hash) {
-          // tetap di register page, tapi tombol sudah terhubung—tidak memaksa
-          // kamu bisa uncomment kalau mau auto-open dashboard:
-          // openModal("modalDashboard");
-        }
-
-        // If user opens with specific hash
-        if (window.location.hash) onHash();
-      })();
-    </script>
+        <!-- Footer -->
+        <footer class="p-8 mt-4 border-t border-slate-200 dark:border-slate-800 text-center">
+          <p class="text-xs text-slate-400">
+            © 2024 Lapor Pak Kuwu Village Portal. All data processed securely according to regional
+            regulations.
+          </p>
+        </footer>
+      </main>
+    </div>
   </body>
 </html>
