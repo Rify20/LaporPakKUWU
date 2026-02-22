@@ -1,292 +1,722 @@
 <!DOCTYPE html>
 
-<html lang="id"><head>
+<html class="light" lang="en"><head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Lapor Pak Kuwu - Suarakan Aspirasi Desa</title>
+<title>Lapor Pak Kuwu - Admin Analytics Dashboard</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <script id="tailwind-config">
-      tailwind.config = {
-        darkMode: "class",
-        theme: {
-          extend: {
-            colors: {
-              "primary": "#137fec",
-              "background-light": "#f6f7f8",
-              "background-dark": "#101922",
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#137fec",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#101922",
+                    },
+                    fontFamily: {
+                        "display": ["Public Sans", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
             },
-            fontFamily: {
-              "display": ["Public Sans", "sans-serif"]
-            },
-            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
-          },
-        },
-      }
+        }
     </script>
 <style>
-        body { font-family: 'Public Sans', sans-serif; }
-        .material-symbols-outlined {
-            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        body {
+            font-family: 'Public Sans', sans-serif;
         }
     </style>
 </head>
-<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen">
-<div class="relative flex flex-col w-full min-h-screen">
-<!-- Top Navigation Bar -->
-<header class="sticky top-0 z-50 w-full bg-white/80 dark:bg-background-dark/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-800">
-<div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-<div class="flex items-center gap-3">
-<div class="bg-primary p-2 rounded-lg text-white">
-<span class="material-symbols-outlined text-2xl">campaign</span>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 transition-colors duration-200">
+<div class="flex h-screen overflow-hidden">
+<!-- Sidebar Navigation -->
+<aside class="w-72 bg-white dark:bg-slate-900 border-r border-slate-200 dark:border-slate-800 flex flex-col h-full shrink-0">
+<div class="p-6 flex items-center gap-3">
+<div class="bg-primary size-10 rounded-lg flex items-center justify-center text-white">
+<span class="material-symbols-outlined">campaign</span>
 </div>
-<span class="text-xl font-extrabold tracking-tight text-slate-900 dark:text-white">Lapor Pak <span class="text-primary">Kuwu</span></span>
+<div>
+<h1 class="text-lg font-bold leading-none">Lapor Pak Kuwu</h1>
+<p class="text-xs text-slate-500 mt-1 uppercase tracking-widest font-semibold">Admin Panel</p>
 </div>
-<nav class="hidden md:flex items-center gap-10">
-<a class="text-sm font-semibold hover:text-primary transition-colors" href="#">Beranda</a>
-<a class="text-sm font-semibold hover:text-primary transition-colors" href="#statistik">Statistik</a>
-<a class="text-sm font-semibold hover:text-primary transition-colors" href="#cara-kerja">Cara Kerja</a>
-<a class="text-sm font-semibold hover:text-primary transition-colors" href="#testimoni">Testimoni</a>
+</div>
+<nav class="flex-1 px-4 space-y-1">
+<a id="nav-dashboard" class="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-primary/10 text-primary font-semibold" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span>Dashboard</span>
+</a>
+<a id="nav-reports" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors" href="#">
+<span class="material-symbols-outlined">description</span>
+<span>All Reports</span>
+</a>
+<a id="nav-citizens" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors" href="#">
+<span class="material-symbols-outlined">group</span>
+<span>Citizens</span>
+</a>
+<a id="nav-map" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors" href="#">
+<span class="material-symbols-outlined">map</span>
+<span>Village Map</span>
+</a>
+<div class="pt-4 pb-2">
+<p class="px-3 text-[10px] font-bold text-slate-400 uppercase tracking-wider">Analysis</p>
+</div>
+<a id="nav-performance" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors" href="#">
+<span class="material-symbols-outlined">monitoring</span>
+<span>Performance</span>
+</a>
+<a id="nav-demographics" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors" href="#">
+<span class="material-symbols-outlined">assessment</span>
+<span>Demographics</span>
+</a>
 </nav>
-<div class="flex items-center gap-4">
-<button class="hidden sm:flex text-sm font-bold text-slate-600 dark:text-slate-300 px-4 py-2 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-all">Masuk</button>
-<button class="bg-primary hover:bg-primary/90 text-white px-6 py-2.5 rounded-lg text-sm font-bold shadow-lg shadow-primary/20 transition-all">Daftar</button>
+<div class="p-4 border-t border-slate-200 dark:border-slate-800">
+<button id="btn-settings" class="flex items-center gap-3 w-full px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors mb-2">
+<span class="material-symbols-outlined">settings</span>
+<span>Settings</span>
+</button>
+<div class="flex items-center gap-3 p-2 bg-slate-100 dark:bg-slate-800 rounded-xl">
+<div class="size-10 rounded-lg bg-slate-300 overflow-hidden" data-alt="Admin user profile picture portrait" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDu89xWEL9XN81x3a-QKXZGg82OLORb8Ui1gVith46Lw4KlgdVfMtsAPshOHaY1u5sNcVKnFI8BvmlA0z_C8UQYgZE8in-bhjVHRxhvRq3GxX93p1-vyAfgG2RepqL302GN5civ-5ognZ8oBrg8A_T_JAWr-gxKyTor9zV0usNzq9jLXchJiwTuUgi4QTf_aTfxoR4PrlNum9SVfqSA4ikAyZfMe2BJnJKzUoLMAa5O1Fi0PChd6gWWoqwZ59aIHOB5Ru2ughNgJkc'); background-size: cover;"></div>
+<div class="flex-1 overflow-hidden">
+<p class="text-sm font-bold truncate">Ahmad Subarjo</p>
+<p class="text-[10px] text-slate-500 truncate">Village Head (Kuwu)</p>
 </div>
+</div>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="flex-1 overflow-y-auto bg-background-light dark:bg-background-dark" id="main">
+<!-- Header -->
+<header class="sticky top-0 z-10 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 px-8 py-4 flex items-center justify-between">
+<div>
+<h2 class="text-xl font-bold tracking-tight">Village Analytics Overview</h2>
+<p class="text-xs text-slate-500">Monitoring real-time community reports</p>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-lg">search</span>
+<input id="search-input" class="pl-10 pr-4 py-2 bg-slate-100 dark:bg-slate-800 border-none rounded-lg text-sm w-64 focus:ring-2 focus:ring-primary transition-all" placeholder="Search reports..." type="text"/>
+</div>
+<button id="btn-notifications" class="p-2 bg-slate-100 dark:bg-slate-800 rounded-lg text-slate-600 dark:text-slate-400 relative" aria-haspopup="true" aria-expanded="false">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-1.5 right-1.5 size-2 bg-red-500 rounded-full border-2 border-white dark:border-slate-800"></span>
+</button>
+<button id="btn-export" class="flex items-center gap-2 px-4 py-2 bg-primary text-white text-sm font-bold rounded-lg hover:bg-primary/90 transition-all">
+<span class="material-symbols-outlined text-[18px]">download</span>
+                        Export Data
+                    </button>
 </div>
 </header>
-<main class="flex-grow">
-<!-- Hero Section -->
-<section class="max-w-7xl mx-auto px-6 py-16 md:py-24">
-<div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-<div class="space-y-8">
-<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-wider">
-<span class="material-symbols-outlined text-sm">verified</span> Platform Digital Desa Resmi
-                        </div>
-<h1 class="text-5xl md:text-6xl font-black leading-[1.1] text-slate-900 dark:text-white">
-                            Suarakan Aspirasi Anda untuk <span class="text-primary">Desa Mandiri</span>
-</h1>
-<p class="text-lg text-slate-600 dark:text-slate-400 max-w-lg leading-relaxed">
-                            Sampaikan laporan Anda langsung kepada Pak Kuwu secara digital. Transparan, terpercaya, dan ditindaklanjuti secara real-time untuk kemajuan desa kita bersama.
-                        </p>
-<div class="flex flex-col sm:flex-row gap-4">
-<button class="flex items-center justify-center gap-2 bg-primary hover:bg-primary/90 text-white px-8 py-4 rounded-xl font-bold text-base shadow-xl shadow-primary/30 transition-all">
-<span class="material-symbols-outlined">edit_note</span> Buat Laporan
+
+<!-- Notifications Dropdown (added; does not change layout) -->
+<div id="notifications-popover" class="hidden fixed top-[72px] right-8 z-20 w-80 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl shadow-lg overflow-hidden">
+  <div class="p-4 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between">
+    <p class="text-sm font-bold">Notifications</p>
+    <button id="btn-notifications-close" class="p-1 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800" aria-label="Close notifications">
+      <span class="material-symbols-outlined text-slate-500">close</span>
+    </button>
+  </div>
+  <div class="p-4 space-y-3">
+    <div class="p-3 bg-slate-50 dark:bg-slate-800 rounded-lg">
+      <p class="text-xs font-bold">New urgent report</p>
+      <p class="text-[11px] text-slate-500 mt-1">Illegal dumping near River (Yesterday)</p>
+    </div>
+    <div class="p-3 bg-slate-50 dark:bg-slate-800 rounded-lg">
+      <p class="text-xs font-bold">Report resolved</p>
+      <p class="text-[11px] text-slate-500 mt-1">Waste Overflow Market Area (Yesterday)</p>
+    </div>
+    <div class="p-3 bg-slate-50 dark:bg-slate-800 rounded-lg">
+      <p class="text-xs font-bold">Pending verification</p>
+      <p class="text-[11px] text-slate-500 mt-1">Broken Street Light RT 05 (5h ago)</p>
+    </div>
+  </div>
+</div>
+
+<div class="p-8 space-y-8" id="section-dashboard">
+<!-- KPI Section -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+<div class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 bg-blue-50 dark:bg-blue-900/20 rounded-lg text-primary">
+<span class="material-symbols-outlined">fact_check</span>
+</div>
+<span class="text-xs font-bold text-green-500 bg-green-50 dark:bg-green-900/20 px-2 py-1 rounded">+12.5%</span>
+</div>
+<p class="text-slate-500 text-xs font-bold uppercase tracking-wider">Total Reports</p>
+<h3 class="text-2xl font-black mt-1">1,284</h3>
+<p class="text-[10px] text-slate-400 mt-2">vs 1,141 last month</p>
+</div>
+<div class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 bg-orange-50 dark:bg-orange-900/20 rounded-lg text-orange-600">
+<span class="material-symbols-outlined">pending_actions</span>
+</div>
+<span class="text-xs font-bold text-red-500 bg-red-50 dark:bg-red-900/20 px-2 py-1 rounded">-4.2%</span>
+</div>
+<p class="text-slate-500 text-xs font-bold uppercase tracking-wider">Pending Tasks</p>
+<h3 class="text-2xl font-black mt-1">42</h3>
+<p class="text-[10px] text-slate-400 mt-2">Critical urgency level</p>
+</div>
+<div class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 bg-green-50 dark:bg-green-900/20 rounded-lg text-green-600">
+<span class="material-symbols-outlined">task_alt</span>
+</div>
+<span class="text-xs font-bold text-green-500 bg-green-50 dark:bg-green-900/20 px-2 py-1 rounded">+18.0%</span>
+</div>
+<p class="text-slate-500 text-xs font-bold uppercase tracking-wider">Resolved Issues</p>
+<h3 class="text-2xl font-black mt-1">1,140</h3>
+<p class="text-[10px] text-slate-400 mt-2">88.7% success rate</p>
+</div>
+<div class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 bg-purple-50 dark:bg-purple-900/20 rounded-lg text-purple-600">
+<span class="material-symbols-outlined">schedule</span>
+</div>
+<span class="text-xs font-bold text-green-500 bg-green-50 dark:bg-green-900/20 px-2 py-1 rounded">-10.1%</span>
+</div>
+<p class="text-slate-500 text-xs font-bold uppercase tracking-wider">Avg. Response Time</p>
+<h3 class="text-2xl font-black mt-1">1.5 Days</h3>
+<p class="text-[10px] text-slate-400 mt-2">Improved from 1.8 days</p>
+</div>
+</div>
+<!-- Charts Section -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-8" id="section-performance">
+<!-- Main Trend Chart -->
+<div class="lg:col-span-2 bg-white dark:bg-slate-900 p-8 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
+<div class="flex items-center justify-between mb-8">
+<div>
+<h4 class="text-lg font-bold">Monthly Report Trend</h4>
+<p class="text-sm text-slate-500">Volume of reports received over the last 6 months</p>
+</div>
+<select id="year-select" class="text-sm bg-slate-50 dark:bg-slate-800 border-slate-200 dark:border-slate-700 rounded-lg">
+<option>2024</option>
+<option>2023</option>
+</select>
+</div>
+<div class="h-64 relative">
+<!-- SVG Trend Chart Visual -->
+<svg class="w-full h-full" preserveaspectratio="none" viewbox="0 0 100 40">
+<defs>
+<lineargradient id="gradientTrend" x1="0" x2="0" y1="0" y2="1">
+<stop offset="0%" stop-color="#137fec" stop-opacity="0.2"></stop>
+<stop offset="100%" stop-color="#137fec" stop-opacity="0"></stop>
+</lineargradient>
+</defs>
+<path d="M0 40 L0 35 C10 32, 15 38, 25 30 C35 22, 45 35, 55 20 C65 10, 75 15, 85 5 L100 8 L100 40 Z" fill="url(#gradientTrend)"></path>
+<path d="M0 35 C10 32, 15 38, 25 30 C35 22, 45 35, 55 20 C65 10, 75 15, 85 5 L100 8" fill="none" stroke="#137fec" stroke-width="0.5"></path>
+</svg>
+<!-- Axis Labels -->
+<div class="flex justify-between mt-4 text-[10px] font-bold text-slate-400 uppercase tracking-tighter">
+<span>Jan</span><span>Feb</span><span>Mar</span><span>Apr</span><span>May</span><span>Jun</span>
+</div>
+</div>
+</div>
+<!-- Category Distribution -->
+<div class="bg-white dark:bg-slate-900 p-8 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
+<h4 class="text-lg font-bold mb-6">Reports per Category</h4>
+<div class="space-y-6">
+<div class="space-y-2">
+<div class="flex justify-between text-xs font-bold uppercase tracking-wider">
+<span>Infrastructure</span>
+<span>45%</span>
+</div>
+<div class="w-full h-2 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
+<div class="h-full bg-primary rounded-full" style="width: 45%"></div>
+</div>
+</div>
+<div class="space-y-2">
+<div class="flex justify-between text-xs font-bold uppercase tracking-wider">
+<span>Waste Management</span>
+<span>30%</span>
+</div>
+<div class="w-full h-2 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
+<div class="h-full bg-green-500 rounded-full" style="width: 30%"></div>
+</div>
+</div>
+<div class="space-y-2">
+<div class="flex justify-between text-xs font-bold uppercase tracking-wider">
+<span>Public Security</span>
+<span>15%</span>
+</div>
+<div class="w-full h-2 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
+<div class="h-full bg-red-500 rounded-full" style="width: 15%"></div>
+</div>
+</div>
+<div class="space-y-2">
+<div class="flex justify-between text-xs font-bold uppercase tracking-wider">
+<span>Others</span>
+<span>10%</span>
+</div>
+<div class="w-full h-2 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
+<div class="h-full bg-slate-400 rounded-full" style="width: 10%"></div>
+</div>
+</div>
+</div>
+<div class="mt-8 pt-6 border-t border-slate-100 dark:border-slate-800">
+<button id="btn-category-breakdown" class="w-full py-2.5 text-xs font-bold text-primary hover:bg-primary/5 rounded-lg transition-colors">
+                                View Category Breakdown
                             </button>
-<button class="flex items-center justify-center gap-2 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white px-8 py-4 rounded-xl font-bold text-base hover:bg-slate-50 dark:hover:bg-slate-700 transition-all">
-<span class="material-symbols-outlined">search</span> Cek Status
-                            </button>
-</div>
-</div>
-<div class="relative group">
-<div class="absolute -inset-4 bg-primary/10 rounded-3xl blur-2xl group-hover:bg-primary/20 transition-all"></div>
-<div class="relative rounded-3xl overflow-hidden shadow-2xl bg-slate-200 aspect-[4/3]">
-<img alt="Village Administration" class="w-full h-full object-cover" data-alt="Modern office building with digital signs for village administration" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCH8hBTb6V_HdqwTqlI72f6B3-vOhVJeU-iad28x7W8uxsZ-y7dvRiqRVllO4NkClM5Uo5sbWzhGkgC8riLKqlzmGnZcYWLOPvuQiJL5SRpFjP-M6DGljHdn7X6sDObgJQ8tyTC795feVyxQ3-dSnlY_SuP2IYQGP80AQ5D3wAzy63F-7QgR_3o-myK8ity2BHax6zFxauQrmjYXO_H66toQOT0M4NQ30RvpggQaqmK_-MlTQrQtx0qArrqz_xRgu3i8NscerUAnKo"/>
 </div>
 </div>
 </div>
-</section>
-<!-- Statistics Section -->
-<section class="bg-white dark:bg-slate-900 py-16 border-y border-slate-100 dark:border-slate-800" id="statistik">
-<div class="max-w-7xl mx-auto px-6">
-<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-<div class="flex items-center gap-6 p-8 rounded-2xl bg-slate-50 dark:bg-slate-800/50 border border-slate-100 dark:border-slate-700">
-<div class="size-16 flex items-center justify-center bg-blue-100 text-blue-600 rounded-xl">
-<span class="material-symbols-outlined text-3xl">inbox</span>
+<!-- Recent Activity & Status Distribution -->
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-8" id="section-reports">
+<!-- Recent Reports -->
+<div class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden">
+<div class="p-6 border-b border-slate-200 dark:border-slate-800 flex justify-between items-center">
+<h4 class="text-lg font-bold">Recent Reports</h4>
+<a id="link-view-all" class="text-xs font-bold text-primary hover:underline" href="#">View All</a>
 </div>
-<div>
-<p class="text-sm font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Laporan Masuk</p>
-<h3 class="text-3xl font-black text-slate-900 dark:text-white">1,248</h3>
-<p class="text-xs font-bold text-green-600 mt-1 flex items-center gap-1">
-<span class="material-symbols-outlined text-sm">trending_up</span> +12% Bulan ini
-                                </p>
-</div>
-</div>
-<div class="flex items-center gap-6 p-8 rounded-2xl bg-slate-50 dark:bg-slate-800/50 border border-slate-100 dark:border-slate-700">
-<div class="size-16 flex items-center justify-center bg-amber-100 text-amber-600 rounded-xl">
-<span class="material-symbols-outlined text-3xl">potted_plant</span>
-</div>
-<div>
-<p class="text-sm font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Sedang Diproses</p>
-<h3 class="text-3xl font-black text-slate-900 dark:text-white">86</h3>
-<p class="text-xs font-bold text-slate-400 mt-1">Estimasi 2-3 hari kerja</p>
-</div>
-</div>
-<div class="flex items-center gap-6 p-8 rounded-2xl bg-slate-50 dark:bg-slate-800/50 border border-slate-100 dark:border-slate-700">
-<div class="size-16 flex items-center justify-center bg-green-100 text-green-600 rounded-xl">
-<span class="material-symbols-outlined text-3xl">task_alt</span>
-</div>
-<div>
-<p class="text-sm font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Selesai</p>
-<h3 class="text-3xl font-black text-slate-900 dark:text-white">1,162</h3>
-<p class="text-xs font-bold text-green-600 mt-1">93% Tingkat kepuasan</p>
-</div>
-</div>
-</div>
-</div>
-</section>
-<!-- How It Works -->
-<section class="py-24" id="cara-kerja">
-<div class="max-w-7xl mx-auto px-6">
-<div class="text-center mb-16 space-y-4">
-<h2 class="text-4xl font-black text-slate-900 dark:text-white">Bagaimana Cara Kerjanya?</h2>
-<p class="text-slate-600 dark:text-slate-400 max-w-2xl mx-auto text-lg">
-                            Proses pelaporan dirancang sesederhana mungkin untuk memastikan setiap warga dapat berpartisipasi.
-                        </p>
-</div>
-<div class="grid grid-cols-1 md:grid-cols-3 gap-12 relative">
-<!-- Connecting Line (Desktop) -->
-<div class="hidden md:block absolute top-1/3 left-0 w-full h-0.5 bg-slate-200 dark:bg-slate-800 -z-10"></div>
-<!-- Step 1 -->
-<div class="flex flex-col items-center text-center space-y-6">
-<div class="size-20 rounded-full bg-primary text-white flex items-center justify-center shadow-xl shadow-primary/40 text-3xl font-bold">1</div>
-<div class="bg-white dark:bg-slate-800 p-8 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-700">
-<span class="material-symbols-outlined text-primary text-4xl mb-4">edit_document</span>
-<h4 class="text-xl font-bold mb-3">Tulis Laporan</h4>
-<p class="text-slate-600 dark:text-slate-400 leading-relaxed">Laporkan keluhan atau aspirasi anda dengan jelas melalui formulir digital yang telah disediakan.</p>
-</div>
-</div>
-<!-- Step 2 -->
-<div class="flex flex-col items-center text-center space-y-6">
-<div class="size-20 rounded-full bg-primary text-white flex items-center justify-center shadow-xl shadow-primary/40 text-3xl font-bold">2</div>
-<div class="bg-white dark:bg-slate-800 p-8 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-700">
-<span class="material-symbols-outlined text-primary text-4xl mb-4">fact_check</span>
-<h4 class="text-xl font-bold mb-3">Verifikasi</h4>
-<p class="text-slate-600 dark:text-slate-400 leading-relaxed">Laporan akan diverifikasi keasliannya dan diteruskan ke instansi desa terkait oleh tim admin kami.</p>
+<div class="overflow-x-auto">
+<table class="w-full text-left" id="reports-table">
+<thead class="bg-slate-50 dark:bg-slate-800/50 text-[10px] font-bold uppercase tracking-wider text-slate-500">
+<tr>
+<th class="px-6 py-3">Reported Issue</th>
+<th class="px-6 py-3">Reporter</th>
+<th class="px-6 py-3">Status</th>
+<th class="px-6 py-3">Date</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-slate-100 dark:divide-slate-800 text-sm" id="reports-tbody">
+<tr>
+<td class="px-6 py-4">
+<p class="font-bold truncate max-w-[200px]">Pothole on Jalan Melati</p>
+<p class="text-xs text-slate-500">Infrastructure</p>
+</td>
+<td class="px-6 py-4">Budi Santoso</td>
+<td class="px-6 py-4">
+<span class="px-2 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 text-[10px] font-bold rounded uppercase">In Progress</span>
+</td>
+<td class="px-6 py-4 text-xs text-slate-500">2h ago</td>
+</tr>
+<tr>
+<td class="px-6 py-4">
+<p class="font-bold truncate max-w-[200px]">Broken Street Light RT 05</p>
+<p class="text-xs text-slate-500">Public Service</p>
+</td>
+<td class="px-6 py-4">Siti Aminah</td>
+<td class="px-6 py-4">
+<span class="px-2 py-1 bg-orange-100 dark:bg-orange-900/30 text-orange-600 dark:text-orange-400 text-[10px] font-bold rounded uppercase">Pending</span>
+</td>
+<td class="px-6 py-4 text-xs text-slate-500">5h ago</td>
+</tr>
+<tr>
+<td class="px-6 py-4">
+<p class="font-bold truncate max-w-[200px]">Waste Overflow Market Area</p>
+<p class="text-xs text-slate-500">Waste Mgmt</p>
+</td>
+<td class="px-6 py-4">Iwan Fals</td>
+<td class="px-6 py-4">
+<span class="px-2 py-1 bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400 text-[10px] font-bold rounded uppercase">Resolved</span>
+</td>
+<td class="px-6 py-4 text-xs text-slate-500">Yesterday</td>
+</tr>
+<tr>
+<td class="px-6 py-4">
+<p class="font-bold truncate max-w-[200px]">Illegal Dumping near River</p>
+<p class="text-xs text-slate-500">Environment</p>
+</td>
+<td class="px-6 py-4">Rina Wati</td>
+<td class="px-6 py-4">
+<span class="px-2 py-1 bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400 text-[10px] font-bold rounded uppercase">Urgent</span>
+</td>
+<td class="px-6 py-4 text-xs text-slate-500">Yesterday</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
-<!-- Step 3 -->
-<div class="flex flex-col items-center text-center space-y-6">
-<div class="size-20 rounded-full bg-primary text-white flex items-center justify-center shadow-xl shadow-primary/40 text-3xl font-bold">3</div>
-<div class="bg-white dark:bg-slate-800 p-8 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-700">
-<span class="material-symbols-outlined text-primary text-4xl mb-4">quick_reorder</span>
-<h4 class="text-xl font-bold mb-3">Tindak Lanjut</h4>
-<p class="text-slate-600 dark:text-slate-400 leading-relaxed">Masalah akan diselesaikan dan Anda dapat memantau status perkembangan secara real-time.</p>
+<!-- Map/Location Focus -->
+<div class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden flex flex-col" id="section-map">
+<div class="p-6 border-b border-slate-200 dark:border-slate-800">
+<h4 class="text-lg font-bold">Report Heatmap</h4>
+<p class="text-xs text-slate-500">Geographic distribution of reported issues</p>
 </div>
+<div class="flex-1 bg-slate-200 dark:bg-slate-800 relative group overflow-hidden">
+<!-- Placeholder for Map Visualization -->
+<div class="absolute inset-0 bg-cover bg-center transition-transform group-hover:scale-105" data-alt="Satellite map view of a village area with report pin indicators" data-location="West Java Village Area" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDc92CVVDtybgxNZl01yYE5_Awc9hXIg-WNAMGsjJMI0VFEg_52pAWSDRtKqTWR5Z-iCEsFNzUvb1Lv6sN603IkQliYSO5SA6Ud9blhARcr1jRx-1lk3SCD3iWMi1-ms46818XbIcoKP70GaFrcKKNf62eF8iUoVah41N1Yq2FRjr2tKo694ZURyHAkTV2O6-NND-rFCftxS4f8zaltG3j2338ZApHSmLiOF7q-nrulZs8VV2abioDithhzn3vDPjiuY8O1TL2N21Y')">
 </div>
-</div>
-</div>
-</section>
-<!-- Testimonials -->
-<section class="bg-slate-900 py-24 text-white overflow-hidden" id="testimoni">
-<div class="max-w-7xl mx-auto px-6">
-<div class="flex flex-col md:flex-row items-end justify-between mb-16 gap-6">
-<div class="space-y-4">
-<span class="text-primary font-bold uppercase tracking-widest text-sm">Suara Warga</span>
-<h2 class="text-4xl md:text-5xl font-black">Apa Kata Mereka?</h2>
-</div>
-<p class="text-slate-400 max-w-md text-lg">
-                            Kepercayaan warga adalah prioritas kami. Lihat bagaimana platform ini membantu menyelesaikan masalah nyata.
-                        </p>
-</div>
-<div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-<div class="bg-slate-800 p-10 rounded-3xl relative">
-<span class="material-symbols-outlined text-primary/20 text-8xl absolute top-4 right-8 select-none">format_quote</span>
-<div class="relative z-10 space-y-6">
-<p class="text-xl italic text-slate-200 leading-relaxed">
-                                    "Alhamdulillah, laporan saya mengenai lampu jalan yang mati di RT 04 langsung direspon dalam waktu 24 jam. Pak Kuwu dan tim admin sangat responsif. Desa kita semakin maju!"
-                                </p>
-<div class="flex items-center gap-4">
-<div class="size-14 rounded-full bg-slate-700 overflow-hidden">
-<img alt="User Avatar" class="w-full h-full object-cover" data-alt="Close-up portrait of a middle-aged Indonesian man smiling" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA3Ofig9rjCJj6TXVwvTaDPiWFepPD_CYHSfltvkNBRMF0JDdhdu3mmA_dqmho671WRRTzwPXyj7KtZ02wAinnOeywQTFUfTkB_i36GK53MdDtGc_vWwPflnNtU07Ug8RwzEUUMXBrkbtsLg_mWsiVkHvEkAjXsPv0oJ_f-uJEM630rhRoCG9GateL0WP28zCXFr_6rKiR--J8eFT5hSGNYvWNYFg3DZmpArQQZ6fTiMzjPh2iTcrbZT-SHePsdGTF9AjUo_Kz_TT4"/>
-</div>
-<div>
-<h5 class="font-bold text-lg">Pak Ahmad Subarjo</h5>
-<p class="text-slate-400 text-sm">Warga Dusun Kliwon</p>
-</div>
-</div>
-</div>
-</div>
-<div class="bg-slate-800 p-10 rounded-3xl relative">
-<span class="material-symbols-outlined text-primary/20 text-8xl absolute top-4 right-8 select-none">format_quote</span>
-<div class="relative z-10 space-y-6">
-<p class="text-xl italic text-slate-200 leading-relaxed">
-                                    "Sistemnya sangat transparan. Kita bisa tahu laporan sudah sampai mana. Tidak perlu lagi capek-capek ke balai desa hanya untuk menanyakan status keluhan."
-                                </p>
-<div class="flex items-center gap-4">
-<div class="size-14 rounded-full bg-slate-700 overflow-hidden">
-<img alt="User Avatar" class="w-full h-full object-cover" data-alt="Portrait of a young woman with a professional smile" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBqpEomBBNnCj3Dvvk_eI94oMQQOLNNjWY_v3HDoV6Vn90LKFxTpTh62ZOD8M-PvyxofrYrmbTP0JabhHLIJxdxEjClENhLuSHUZpUW3xd89v15rO9T-1WMK3jgUX-1QrBoKPjFuuKnD8c3l1eMDeW3N14QerMaqoURHMCsGwbcqnijaENPZA2EB3J04ZIYF7LF0hoQIHhewS424YpMIZWNjh7A0dKMljnsuHDbta4ywEBgptgQBMFludBPK36A56FWeKMNYfVxFak"/>
-</div>
-<div>
-<h5 class="font-bold text-lg">Siti Maryam</h5>
-<p class="text-slate-400 text-sm">Mahasiswi, Warga Dusun Manis</p>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</section>
-</main>
-<!-- Footer -->
-<footer class="bg-white dark:bg-slate-950 border-t border-slate-200 dark:border-slate-800 pt-16 pb-8">
-<div class="max-w-7xl mx-auto px-6">
-<div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
-<div class="col-span-1 md:col-span-1 space-y-6">
-<div class="flex items-center gap-3">
-<div class="bg-primary p-2 rounded-lg text-white">
-<span class="material-symbols-outlined text-xl">campaign</span>
-</div>
-<span class="text-lg font-extrabold tracking-tight text-slate-900 dark:text-white">Lapor Pak <span class="text-primary">Kuwu</span></span>
-</div>
-<p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">
-                            Membangun desa yang lebih baik melalui transparansi dan partisipasi aktif seluruh warga desa.
-                        </p>
-<div class="flex gap-4">
-<a class="size-10 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-slate-600 hover:bg-primary hover:text-white transition-all" href="#">
-<span class="material-symbols-outlined text-xl">share</span>
-</a>
-<a class="size-10 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-slate-600 hover:bg-primary hover:text-white transition-all" href="#">
-<span class="material-symbols-outlined text-xl">public</span>
-</a>
-</div>
-</div>
-<div class="space-y-6">
-<h4 class="font-bold text-slate-900 dark:text-white">Tautan Cepat</h4>
-<ul class="space-y-4 text-sm text-slate-500 dark:text-slate-400 font-medium">
-<li><a class="hover:text-primary transition-colors" href="#">Tentang Kami</a></li>
-<li><a class="hover:text-primary transition-colors" href="#">Statistik Desa</a></li>
-<li><a class="hover:text-primary transition-colors" href="#">Berita Desa</a></li>
-<li><a class="hover:text-primary transition-colors" href="#">Galeri Kegiatan</a></li>
-</ul>
-</div>
-<div class="space-y-6">
-<h4 class="font-bold text-slate-900 dark:text-white">Bantuan</h4>
-<ul class="space-y-4 text-sm text-slate-500 dark:text-slate-400 font-medium">
-<li><a class="hover:text-primary transition-colors" href="#">Panduan Pengguna</a></li>
-<li><a class="hover:text-primary transition-colors" href="#">Kebijakan Privasi</a></li>
-<li><a class="hover:text-primary transition-colors" href="#">Syarat &amp; Ketentuan</a></li>
-<li><a class="hover:text-primary transition-colors" href="#">Hubungi Kami</a></li>
-</ul>
-</div>
-<div class="space-y-6">
-<h4 class="font-bold text-slate-900 dark:text-white">Kontak Desa</h4>
-<div class="space-y-4 text-sm text-slate-500 dark:text-slate-400">
-<div class="flex items-start gap-3">
+<!-- Map Overlay -->
+<div class="absolute inset-0 bg-primary/10 pointer-events-none"></div>
+<!-- Dummy Pins -->
+<div class="absolute top-1/4 left-1/3 size-4 bg-red-500 rounded-full border-2 border-white animate-pulse"></div>
+<div class="absolute top-1/2 left-1/2 size-4 bg-primary rounded-full border-2 border-white"></div>
+<div class="absolute bottom-1/4 right-1/4 size-4 bg-green-500 rounded-full border-2 border-white"></div>
+<div class="absolute bottom-4 left-4 right-4 bg-white/90 dark:bg-slate-900/90 backdrop-blur-sm p-3 rounded-lg border border-slate-200 dark:border-slate-800 shadow-lg flex items-center justify-between">
+<div class="flex items-center gap-2">
 <span class="material-symbols-outlined text-primary">location_on</span>
-<p>Jl. Balai Desa No. 1, Kecamatan Sukamaju, Kabupaten Indramayu</p>
+<div>
+<p class="text-xs font-bold">Desa Maju Jaya</p>
+<p class="text-[10px] text-slate-500">Kecamatan Sukamakmur</p>
 </div>
-<div class="flex items-center gap-3">
-<span class="material-symbols-outlined text-primary">call</span>
-<p>(0234) 123456</p>
 </div>
-<div class="flex items-center gap-3">
-<span class="material-symbols-outlined text-primary">mail</span>
-<p>kontak@desa-sukamaju.go.id</p>
+<button id="btn-expand-map" class="px-3 py-1.5 bg-primary text-white text-[10px] font-bold rounded-lg uppercase">Expand Map</button>
 </div>
 </div>
 </div>
 </div>
-<div class="border-t border-slate-100 dark:border-slate-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-slate-400">
-<p>© 2024 Pemerintah Desa Sukamaju. Dikelola oleh Tim Digital Desa.</p>
-<div class="flex gap-6">
-<a class="hover:text-primary" href="#">Facebook</a>
-<a class="hover:text-primary" href="#">Instagram</a>
-<a class="hover:text-primary" href="#">Twitter</a>
+
+<!-- Citizens + Demographics placeholder sections (added invisible anchors; no style change) -->
+<div id="section-citizens" class="hidden"></div>
+<div id="section-demographics" class="hidden"></div>
+
 </div>
-</div>
-</div>
+<!-- Footer -->
+<footer class="p-8 mt-4 border-t border-slate-200 dark:border-slate-800 text-center">
+<p class="text-xs text-slate-400">© 2024 Lapor Pak Kuwu Village Portal. All data processed securely according to regional regulations.</p>
 </footer>
+</main>
 </div>
+
+<!-- SETTINGS MODAL (added; overlay only) -->
+<div id="modal-settings" class="hidden fixed inset-0 z-30">
+  <div class="absolute inset-0 bg-slate-900/40"></div>
+  <div class="relative mx-auto mt-24 w-[92%] max-w-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl shadow-xl overflow-hidden">
+    <div class="p-5 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between">
+      <div>
+        <p class="text-sm font-bold">Settings</p>
+        <p class="text-[11px] text-slate-500 mt-0.5">Local UI preferences</p>
+      </div>
+      <button id="btn-settings-close" class="p-1 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800" aria-label="Close settings">
+        <span class="material-symbols-outlined text-slate-500">close</span>
+      </button>
+    </div>
+    <div class="p-5 space-y-4">
+      <div class="flex items-center justify-between p-3 bg-slate-50 dark:bg-slate-800 rounded-lg">
+        <div>
+          <p class="text-xs font-bold">Dark Mode</p>
+          <p class="text-[11px] text-slate-500 mt-0.5">Toggle theme (saved locally)</p>
+        </div>
+        <button id="btn-toggle-dark" class="px-3 py-1.5 bg-primary text-white text-[11px] font-bold rounded-lg">Toggle</button>
+      </div>
+      <div class="flex items-center justify-between p-3 bg-slate-50 dark:bg-slate-800 rounded-lg">
+        <div>
+          <p class="text-xs font-bold">Clear Search</p>
+          <p class="text-[11px] text-slate-500 mt-0.5">Reset report filter</p>
+        </div>
+        <button id="btn-clear-search" class="px-3 py-1.5 bg-slate-200 dark:bg-slate-700 text-slate-800 dark:text-slate-100 text-[11px] font-bold rounded-lg">Reset</button>
+      </div>
+    </div>
+    <div class="p-5 border-t border-slate-200 dark:border-slate-800 flex justify-end">
+      <button id="btn-settings-done" class="px-4 py-2 bg-primary text-white text-sm font-bold rounded-lg hover:bg-primary/90 transition-all">Done</button>
+    </div>
+  </div>
+</div>
+
+<!-- CATEGORY MODAL (added) -->
+<div id="modal-category" class="hidden fixed inset-0 z-30">
+  <div class="absolute inset-0 bg-slate-900/40"></div>
+  <div class="relative mx-auto mt-24 w-[92%] max-w-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl shadow-xl overflow-hidden">
+    <div class="p-5 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between">
+      <div>
+        <p class="text-sm font-bold">Category Breakdown</p>
+        <p class="text-[11px] text-slate-500 mt-0.5">Detailed distribution (demo)</p>
+      </div>
+      <button id="btn-category-close" class="p-1 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800" aria-label="Close breakdown">
+        <span class="material-symbols-outlined text-slate-500">close</span>
+      </button>
+    </div>
+    <div class="p-5 space-y-3 text-sm">
+      <div class="flex justify-between"><span class="text-slate-500">Infrastructure</span><span class="font-bold">45%</span></div>
+      <div class="flex justify-between"><span class="text-slate-500">Waste Management</span><span class="font-bold">30%</span></div>
+      <div class="flex justify-between"><span class="text-slate-500">Public Security</span><span class="font-bold">15%</span></div>
+      <div class="flex justify-between"><span class="text-slate-500">Others</span><span class="font-bold">10%</span></div>
+      <p class="text-[11px] text-slate-500 pt-2">Note: This is a front-end demo breakdown based on the static UI.</p>
+    </div>
+    <div class="p-5 border-t border-slate-200 dark:border-slate-800 flex justify-end">
+      <button id="btn-category-ok" class="px-4 py-2 bg-primary text-white text-sm font-bold rounded-lg hover:bg-primary/90 transition-all">Close</button>
+    </div>
+  </div>
+</div>
+
+<!-- MAP MODAL (added) -->
+<div id="modal-map" class="hidden fixed inset-0 z-30">
+  <div class="absolute inset-0 bg-slate-900/40"></div>
+  <div class="relative mx-auto mt-10 w-[92%] max-w-5xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl shadow-xl overflow-hidden">
+    <div class="p-5 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between">
+      <div>
+        <p class="text-sm font-bold">Report Heatmap</p>
+        <p class="text-[11px] text-slate-500 mt-0.5">Expanded view (demo)</p>
+      </div>
+      <button id="btn-map-close" class="p-1 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800" aria-label="Close map">
+        <span class="material-symbols-outlined text-slate-500">close</span>
+      </button>
+    </div>
+    <div class="p-5">
+      <div class="w-full h-[60vh] bg-slate-200 dark:bg-slate-800 rounded-xl overflow-hidden relative">
+        <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDc92CVVDtybgxNZl01yYE5_Awc9hXIg-WNAMGsjJMI0VFEg_52pAWSDRtKqTWR5Z-iCEsFNzUvb1Lv6sN603IkQliYSO5SA6Ud9blhARcr1jRx-1lk3SCD3iWMi1-ms46818XbIcoKP70GaFrcKKNf62eF8iUoVah41N1Yq2FRjr2tKo694ZURyHAkTV2O6-NND-rFCftxS4f8zaltG3j2338ZApHSmLiOF7q-nrulZs8VV2abioDithhzn3vDPjiuY8O1TL2N21Y')"></div>
+        <div class="absolute inset-0 bg-primary/10 pointer-events-none"></div>
+        <div class="absolute top-1/4 left-1/3 size-4 bg-red-500 rounded-full border-2 border-white animate-pulse"></div>
+        <div class="absolute top-1/2 left-1/2 size-4 bg-primary rounded-full border-2 border-white"></div>
+        <div class="absolute bottom-1/4 right-1/4 size-4 bg-green-500 rounded-full border-2 border-white"></div>
+      </div>
+      <p class="text-[11px] text-slate-500 mt-3">This is a static map preview for GitHub Pages demo. Replace with real map (Leaflet/Mapbox/Google Maps) for production.</p>
+    </div>
+  </div>
+</div>
+
+<script>
+/**
+ * IMPORTANT:
+ * - This script only adds functionality to existing buttons/links.
+ * - It does NOT change your design structure or Tailwind classes except for active nav highlighting.
+ */
+
+(function () {
+  const docEl = document.documentElement;
+  const main = document.getElementById("main");
+
+  // --------- Helpers ----------
+  function show(el) { el.classList.remove("hidden"); }
+  function hide(el) { el.classList.add("hidden"); }
+
+  function saveTheme(isDark) {
+    try { localStorage.setItem("lpkuwu_theme", isDark ? "dark" : "light"); } catch(e) {}
+  }
+  function loadTheme() {
+    try { return localStorage.getItem("lpkuwu_theme"); } catch(e) { return null; }
+  }
+  function setDarkMode(enabled) {
+    if (enabled) docEl.classList.add("dark");
+    else docEl.classList.remove("dark");
+    saveTheme(enabled);
+  }
+  // Initialize theme from localStorage (doesn't alter UI structure)
+  const storedTheme = loadTheme();
+  if (storedTheme === "dark") setDarkMode(true);
+  if (storedTheme === "light") setDarkMode(false);
+
+  function smoothScrollToId(id) {
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+
+  // Nav active styling (keep original style, just toggle classes)
+  const navLinks = [
+    { id: "nav-dashboard", section: "section-dashboard" },
+    { id: "nav-reports", section: "section-reports" },
+    { id: "nav-citizens", section: "section-citizens" },
+    { id: "nav-map", section: "section-map" },
+    { id: "nav-performance", section: "section-performance" },
+    { id: "nav-demographics", section: "section-demographics" },
+  ];
+
+  function setActiveNav(navId) {
+    navLinks.forEach(n => {
+      const a = document.getElementById(n.id);
+      if (!a) return;
+      // reset to default (same classes as original non-active items)
+      a.classList.remove("bg-primary/10", "text-primary", "font-semibold");
+      a.classList.add("text-slate-600", "dark:text-slate-400");
+      if (n.id === navId) {
+        a.classList.add("bg-primary/10", "text-primary", "font-semibold");
+        a.classList.remove("text-slate-600", "dark:text-slate-400");
+      }
+    });
+  }
+
+  navLinks.forEach(n => {
+    const a = document.getElementById(n.id);
+    if (!a) return;
+    a.addEventListener("click", (e) => {
+      e.preventDefault();
+      smoothScrollToId(n.section);
+      setActiveNav(n.id);
+    });
+  });
+
+  // --------- Search filter (Recent Reports table) ----------
+  const searchInput = document.getElementById("search-input");
+  const tbody = document.getElementById("reports-tbody");
+
+  function filterReports(query) {
+    if (!tbody) return;
+    const q = (query || "").trim().toLowerCase();
+    const rows = Array.from(tbody.querySelectorAll("tr"));
+    rows.forEach(row => {
+      const text = row.innerText.toLowerCase();
+      row.style.display = text.includes(q) ? "" : "none";
+    });
+  }
+
+  if (searchInput) {
+    searchInput.addEventListener("input", (e) => filterReports(e.target.value));
+  }
+
+  // --------- View All link ----------
+  const viewAll = document.getElementById("link-view-all");
+  if (viewAll) {
+    viewAll.addEventListener("click", (e) => {
+      e.preventDefault();
+      smoothScrollToId("section-reports");
+      setActiveNav("nav-reports");
+    });
+  }
+
+  // --------- Notifications dropdown ----------
+  const btnNotif = document.getElementById("btn-notifications");
+  const notifPopover = document.getElementById("notifications-popover");
+  const btnNotifClose = document.getElementById("btn-notifications-close");
+
+  function toggleNotifications(forceState) {
+    if (!notifPopover || !btnNotif) return;
+    const isHidden = notifPopover.classList.contains("hidden");
+    const shouldOpen = typeof forceState === "boolean" ? forceState : isHidden;
+    if (shouldOpen) {
+      show(notifPopover);
+      btnNotif.setAttribute("aria-expanded", "true");
+    } else {
+      hide(notifPopover);
+      btnNotif.setAttribute("aria-expanded", "false");
+    }
+  }
+
+  if (btnNotif) btnNotif.addEventListener("click", (e) => { e.stopPropagation(); toggleNotifications(); });
+  if (btnNotifClose) btnNotifClose.addEventListener("click", () => toggleNotifications(false));
+
+  document.addEventListener("click", (e) => {
+    // close notifications if click outside
+    if (!notifPopover || notifPopover.classList.contains("hidden")) return;
+    if (notifPopover.contains(e.target) || (btnNotif && btnNotif.contains(e.target))) return;
+    toggleNotifications(false);
+  });
+
+  // --------- Export CSV from table ----------
+  const btnExport = document.getElementById("btn-export");
+  const reportsTable = document.getElementById("reports-table");
+
+  function tableToCSV(table) {
+    const rows = Array.from(table.querySelectorAll("tr"));
+    return rows.map(row => {
+      const cols = Array.from(row.querySelectorAll("th,td"));
+      return cols.map(col => {
+        const raw = col.innerText.replace(/\s+/g, " ").trim();
+        const escaped = `"${raw.replace(/"/g, '""')}"`;
+        return escaped;
+      }).join(",");
+    }).join("\n");
+  }
+
+  function downloadText(filename, text) {
+    const blob = new Blob([text], { type: "text/csv;charset=utf-8;" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    URL.revokeObjectURL(url);
+  }
+
+  if (btnExport && reportsTable) {
+    btnExport.addEventListener("click", () => {
+      const csv = tableToCSV(reportsTable);
+      const ts = new Date();
+      const pad = (n) => String(n).padStart(2, "0");
+      const name = `lapor-pak-kuwu-recent-reports-${ts.getFullYear()}-${pad(ts.getMonth()+1)}-${pad(ts.getDate())}.csv`;
+      downloadText(name, csv);
+    });
+  }
+
+  // --------- Settings modal ----------
+  const btnSettings = document.getElementById("btn-settings");
+  const modalSettings = document.getElementById("modal-settings");
+  const btnSettingsClose = document.getElementById("btn-settings-close");
+  const btnSettingsDone = document.getElementById("btn-settings-done");
+  const btnToggleDark = document.getElementById("btn-toggle-dark");
+  const btnClearSearch = document.getElementById("btn-clear-search");
+
+  function openSettings() { if (modalSettings) show(modalSettings); }
+  function closeSettings() { if (modalSettings) hide(modalSettings); }
+
+  if (btnSettings) btnSettings.addEventListener("click", openSettings);
+  if (btnSettingsClose) btnSettingsClose.addEventListener("click", closeSettings);
+  if (btnSettingsDone) btnSettingsDone.addEventListener("click", closeSettings);
+
+  if (btnToggleDark) {
+    btnToggleDark.addEventListener("click", () => {
+      const isDark = docEl.classList.contains("dark");
+      setDarkMode(!isDark);
+    });
+  }
+
+  if (btnClearSearch && searchInput) {
+    btnClearSearch.addEventListener("click", () => {
+      searchInput.value = "";
+      filterReports("");
+    });
+  }
+
+  // Close modals on Escape
+  document.addEventListener("keydown", (e) => {
+    if (e.key !== "Escape") return;
+    if (modalSettings && !modalSettings.classList.contains("hidden")) closeSettings();
+    if (modalCategory && !modalCategory.classList.contains("hidden")) closeCategory();
+    if (modalMap && !modalMap.classList.contains("hidden")) closeMap();
+    if (notifPopover && !notifPopover.classList.contains("hidden")) toggleNotifications(false);
+  });
+
+  // --------- Category Breakdown modal ----------
+  const btnCategory = document.getElementById("btn-category-breakdown");
+  const modalCategory = document.getElementById("modal-category");
+  const btnCategoryClose = document.getElementById("btn-category-close");
+  const btnCategoryOk = document.getElementById("btn-category-ok");
+
+  function openCategory() { if (modalCategory) show(modalCategory); }
+  function closeCategory() { if (modalCategory) hide(modalCategory); }
+
+  if (btnCategory) btnCategory.addEventListener("click", openCategory);
+  if (btnCategoryClose) btnCategoryClose.addEventListener("click", closeCategory);
+  if (btnCategoryOk) btnCategoryOk.addEventListener("click", closeCategory);
+
+  // --------- Expand Map modal ----------
+  const btnExpandMap = document.getElementById("btn-expand-map");
+  const modalMap = document.getElementById("modal-map");
+  const btnMapClose = document.getElementById("btn-map-close");
+
+  function openMap() { if (modalMap) show(modalMap); }
+  function closeMap() { if (modalMap) hide(modalMap); }
+
+  if (btnExpandMap) btnExpandMap.addEventListener("click", openMap);
+  if (btnMapClose) btnMapClose.addEventListener("click", closeMap);
+
+  // Close modals by clicking overlay (background)
+  function closeOnOverlayClick(modalEl, closeFn) {
+    if (!modalEl) return;
+    modalEl.addEventListener("click", (e) => {
+      // only close if click on backdrop (modal container itself), not inside content
+      if (e.target === modalEl || (e.target && e.target.classList && e.target.classList.contains("bg-slate-900/40"))) {
+        closeFn();
+      }
+    });
+  }
+
+  closeOnOverlayClick(modalSettings, closeSettings);
+  closeOnOverlayClick(modalCategory, closeCategory);
+  closeOnOverlayClick(modalMap, closeMap);
+
+  // --------- Year select demo action (keeps UI intact) ----------
+  const yearSelect = document.getElementById("year-select");
+  if (yearSelect) {
+    yearSelect.addEventListener("change", () => {
+      // Demo-only: no chart data available; keep UX feedback minimal
+      // (No alert to avoid annoying; could add toast later)
+    });
+  }
+
+})();
+</script>
+
 </body></html>
