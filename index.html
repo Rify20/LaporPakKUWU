@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+
+<html lang="id"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Lapor Pak Kuwu - Suarakan Aspirasi Desa</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary": "#137fec",
+              "background-light": "#f6f7f8",
+              "background-dark": "#101922",
+            },
+            fontFamily: {
+              "display": ["Public Sans", "sans-serif"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Public Sans', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen">
+<div class="relative flex flex-col w-full min-h-screen">
+<!-- Top Navigation Bar -->
+<header class="sticky top-0 z-50 w-full bg-white/80 dark:bg-background-dark/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-800">
+<div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="bg-primary p-2 rounded-lg text-white">
+<span class="material-symbols-outlined text-2xl">campaign</span>
+</div>
+<span class="text-xl font-extrabold tracking-tight text-slate-900 dark:text-white">Lapor Pak <span class="text-primary">Kuwu</span></span>
+</div>
+<nav class="hidden md:flex items-center gap-10">
+<a class="text-sm font-semibold hover:text-primary transition-colors" href="#">Beranda</a>
+<a class="text-sm font-semibold hover:text-primary transition-colors" href="#statistik">Statistik</a>
+<a class="text-sm font-semibold hover:text-primary transition-colors" href="#cara-kerja">Cara Kerja</a>
+<a class="text-sm font-semibold hover:text-primary transition-colors" href="#testimoni">Testimoni</a>
+</nav>
+<div class="flex items-center gap-4">
+<button class="hidden sm:flex text-sm font-bold text-slate-600 dark:text-slate-300 px-4 py-2 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-all">Masuk</button>
+<button class="bg-primary hover:bg-primary/90 text-white px-6 py-2.5 rounded-lg text-sm font-bold shadow-lg shadow-primary/20 transition-all">Daftar</button>
+</div>
+</div>
+</header>
+<main class="flex-grow">
+<!-- Hero Section -->
+<section class="max-w-7xl mx-auto px-6 py-16 md:py-24">
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+<div class="space-y-8">
+<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-wider">
+<span class="material-symbols-outlined text-sm">verified</span> Platform Digital Desa Resmi
+                        </div>
+<h1 class="text-5xl md:text-6xl font-black leading-[1.1] text-slate-900 dark:text-white">
+                            Suarakan Aspirasi Anda untuk <span class="text-primary">Desa Mandiri</span>
+</h1>
+<p class="text-lg text-slate-600 dark:text-slate-400 max-w-lg leading-relaxed">
+                            Sampaikan laporan Anda langsung kepada Pak Kuwu secara digital. Transparan, terpercaya, dan ditindaklanjuti secara real-time untuk kemajuan desa kita bersama.
+                        </p>
+<div class="flex flex-col sm:flex-row gap-4">
+<button class="flex items-center justify-center gap-2 bg-primary hover:bg-primary/90 text-white px-8 py-4 rounded-xl font-bold text-base shadow-xl shadow-primary/30 transition-all">
+<span class="material-symbols-outlined">edit_note</span> Buat Laporan
+                            </button>
+<button class="flex items-center justify-center gap-2 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white px-8 py-4 rounded-xl font-bold text-base hover:bg-slate-50 dark:hover:bg-slate-700 transition-all">
+<span class="material-symbols-outlined">search</span> Cek Status
+                            </button>
+</div>
+</div>
+<div class="relative group">
+<div class="absolute -inset-4 bg-primary/10 rounded-3xl blur-2xl group-hover:bg-primary/20 transition-all"></div>
+<div class="relative rounded-3xl overflow-hidden shadow-2xl bg-slate-200 aspect-[4/3]">
+<img alt="Village Administration" class="w-full h-full object-cover" data-alt="Modern office building with digital signs for village administration" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCH8hBTb6V_HdqwTqlI72f6B3-vOhVJeU-iad28x7W8uxsZ-y7dvRiqRVllO4NkClM5Uo5sbWzhGkgC8riLKqlzmGnZcYWLOPvuQiJL5SRpFjP-M6DGljHdn7X6sDObgJQ8tyTC795feVyxQ3-dSnlY_SuP2IYQGP80AQ5D3wAzy63F-7QgR_3o-myK8ity2BHax6zFxauQrmjYXO_H66toQOT0M4NQ30RvpggQaqmK_-MlTQrQtx0qArrqz_xRgu3i8NscerUAnKo"/>
+</div>
+</div>
+</div>
+</section>
+<!-- Statistics Section -->
+<section class="bg-white dark:bg-slate-900 py-16 border-y border-slate-100 dark:border-slate-800" id="statistik">
+<div class="max-w-7xl mx-auto px-6">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<div class="flex items-center gap-6 p-8 rounded-2xl bg-slate-50 dark:bg-slate-800/50 border border-slate-100 dark:border-slate-700">
+<div class="size-16 flex items-center justify-center bg-blue-100 text-blue-600 rounded-xl">
+<span class="material-symbols-outlined text-3xl">inbox</span>
+</div>
+<div>
+<p class="text-sm font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Laporan Masuk</p>
+<h3 class="text-3xl font-black text-slate-900 dark:text-white">1,248</h3>
+<p class="text-xs font-bold text-green-600 mt-1 flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">trending_up</span> +12% Bulan ini
+                                </p>
+</div>
+</div>
+<div class="flex items-center gap-6 p-8 rounded-2xl bg-slate-50 dark:bg-slate-800/50 border border-slate-100 dark:border-slate-700">
+<div class="size-16 flex items-center justify-center bg-amber-100 text-amber-600 rounded-xl">
+<span class="material-symbols-outlined text-3xl">potted_plant</span>
+</div>
+<div>
+<p class="text-sm font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Sedang Diproses</p>
+<h3 class="text-3xl font-black text-slate-900 dark:text-white">86</h3>
+<p class="text-xs font-bold text-slate-400 mt-1">Estimasi 2-3 hari kerja</p>
+</div>
+</div>
+<div class="flex items-center gap-6 p-8 rounded-2xl bg-slate-50 dark:bg-slate-800/50 border border-slate-100 dark:border-slate-700">
+<div class="size-16 flex items-center justify-center bg-green-100 text-green-600 rounded-xl">
+<span class="material-symbols-outlined text-3xl">task_alt</span>
+</div>
+<div>
+<p class="text-sm font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Selesai</p>
+<h3 class="text-3xl font-black text-slate-900 dark:text-white">1,162</h3>
+<p class="text-xs font-bold text-green-600 mt-1">93% Tingkat kepuasan</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- How It Works -->
+<section class="py-24" id="cara-kerja">
+<div class="max-w-7xl mx-auto px-6">
+<div class="text-center mb-16 space-y-4">
+<h2 class="text-4xl font-black text-slate-900 dark:text-white">Bagaimana Cara Kerjanya?</h2>
+<p class="text-slate-600 dark:text-slate-400 max-w-2xl mx-auto text-lg">
+                            Proses pelaporan dirancang sesederhana mungkin untuk memastikan setiap warga dapat berpartisipasi.
+                        </p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-12 relative">
+<!-- Connecting Line (Desktop) -->
+<div class="hidden md:block absolute top-1/3 left-0 w-full h-0.5 bg-slate-200 dark:bg-slate-800 -z-10"></div>
+<!-- Step 1 -->
+<div class="flex flex-col items-center text-center space-y-6">
+<div class="size-20 rounded-full bg-primary text-white flex items-center justify-center shadow-xl shadow-primary/40 text-3xl font-bold">1</div>
+<div class="bg-white dark:bg-slate-800 p-8 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-700">
+<span class="material-symbols-outlined text-primary text-4xl mb-4">edit_document</span>
+<h4 class="text-xl font-bold mb-3">Tulis Laporan</h4>
+<p class="text-slate-600 dark:text-slate-400 leading-relaxed">Laporkan keluhan atau aspirasi anda dengan jelas melalui formulir digital yang telah disediakan.</p>
+</div>
+</div>
+<!-- Step 2 -->
+<div class="flex flex-col items-center text-center space-y-6">
+<div class="size-20 rounded-full bg-primary text-white flex items-center justify-center shadow-xl shadow-primary/40 text-3xl font-bold">2</div>
+<div class="bg-white dark:bg-slate-800 p-8 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-700">
+<span class="material-symbols-outlined text-primary text-4xl mb-4">fact_check</span>
+<h4 class="text-xl font-bold mb-3">Verifikasi</h4>
+<p class="text-slate-600 dark:text-slate-400 leading-relaxed">Laporan akan diverifikasi keasliannya dan diteruskan ke instansi desa terkait oleh tim admin kami.</p>
+</div>
+</div>
+<!-- Step 3 -->
+<div class="flex flex-col items-center text-center space-y-6">
+<div class="size-20 rounded-full bg-primary text-white flex items-center justify-center shadow-xl shadow-primary/40 text-3xl font-bold">3</div>
+<div class="bg-white dark:bg-slate-800 p-8 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-700">
+<span class="material-symbols-outlined text-primary text-4xl mb-4">quick_reorder</span>
+<h4 class="text-xl font-bold mb-3">Tindak Lanjut</h4>
+<p class="text-slate-600 dark:text-slate-400 leading-relaxed">Masalah akan diselesaikan dan Anda dapat memantau status perkembangan secara real-time.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Testimonials -->
+<section class="bg-slate-900 py-24 text-white overflow-hidden" id="testimoni">
+<div class="max-w-7xl mx-auto px-6">
+<div class="flex flex-col md:flex-row items-end justify-between mb-16 gap-6">
+<div class="space-y-4">
+<span class="text-primary font-bold uppercase tracking-widest text-sm">Suara Warga</span>
+<h2 class="text-4xl md:text-5xl font-black">Apa Kata Mereka?</h2>
+</div>
+<p class="text-slate-400 max-w-md text-lg">
+                            Kepercayaan warga adalah prioritas kami. Lihat bagaimana platform ini membantu menyelesaikan masalah nyata.
+                        </p>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+<div class="bg-slate-800 p-10 rounded-3xl relative">
+<span class="material-symbols-outlined text-primary/20 text-8xl absolute top-4 right-8 select-none">format_quote</span>
+<div class="relative z-10 space-y-6">
+<p class="text-xl italic text-slate-200 leading-relaxed">
+                                    "Alhamdulillah, laporan saya mengenai lampu jalan yang mati di RT 04 langsung direspon dalam waktu 24 jam. Pak Kuwu dan tim admin sangat responsif. Desa kita semakin maju!"
+                                </p>
+<div class="flex items-center gap-4">
+<div class="size-14 rounded-full bg-slate-700 overflow-hidden">
+<img alt="User Avatar" class="w-full h-full object-cover" data-alt="Close-up portrait of a middle-aged Indonesian man smiling" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA3Ofig9rjCJj6TXVwvTaDPiWFepPD_CYHSfltvkNBRMF0JDdhdu3mmA_dqmho671WRRTzwPXyj7KtZ02wAinnOeywQTFUfTkB_i36GK53MdDtGc_vWwPflnNtU07Ug8RwzEUUMXBrkbtsLg_mWsiVkHvEkAjXsPv0oJ_f-uJEM630rhRoCG9GateL0WP28zCXFr_6rKiR--J8eFT5hSGNYvWNYFg3DZmpArQQZ6fTiMzjPh2iTcrbZT-SHePsdGTF9AjUo_Kz_TT4"/>
+</div>
+<div>
+<h5 class="font-bold text-lg">Pak Ahmad Subarjo</h5>
+<p class="text-slate-400 text-sm">Warga Dusun Kliwon</p>
+</div>
+</div>
+</div>
+</div>
+<div class="bg-slate-800 p-10 rounded-3xl relative">
+<span class="material-symbols-outlined text-primary/20 text-8xl absolute top-4 right-8 select-none">format_quote</span>
+<div class="relative z-10 space-y-6">
+<p class="text-xl italic text-slate-200 leading-relaxed">
+                                    "Sistemnya sangat transparan. Kita bisa tahu laporan sudah sampai mana. Tidak perlu lagi capek-capek ke balai desa hanya untuk menanyakan status keluhan."
+                                </p>
+<div class="flex items-center gap-4">
+<div class="size-14 rounded-full bg-slate-700 overflow-hidden">
+<img alt="User Avatar" class="w-full h-full object-cover" data-alt="Portrait of a young woman with a professional smile" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBqpEomBBNnCj3Dvvk_eI94oMQQOLNNjWY_v3HDoV6Vn90LKFxTpTh62ZOD8M-PvyxofrYrmbTP0JabhHLIJxdxEjClENhLuSHUZpUW3xd89v15rO9T-1WMK3jgUX-1QrBoKPjFuuKnD8c3l1eMDeW3N14QerMaqoURHMCsGwbcqnijaENPZA2EB3J04ZIYF7LF0hoQIHhewS424YpMIZWNjh7A0dKMljnsuHDbta4ywEBgptgQBMFludBPK36A56FWeKMNYfVxFak"/>
+</div>
+<div>
+<h5 class="font-bold text-lg">Siti Maryam</h5>
+<p class="text-slate-400 text-sm">Mahasiswi, Warga Dusun Manis</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-white dark:bg-slate-950 border-t border-slate-200 dark:border-slate-800 pt-16 pb-8">
+<div class="max-w-7xl mx-auto px-6">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
+<div class="col-span-1 md:col-span-1 space-y-6">
+<div class="flex items-center gap-3">
+<div class="bg-primary p-2 rounded-lg text-white">
+<span class="material-symbols-outlined text-xl">campaign</span>
+</div>
+<span class="text-lg font-extrabold tracking-tight text-slate-900 dark:text-white">Lapor Pak <span class="text-primary">Kuwu</span></span>
+</div>
+<p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">
+                            Membangun desa yang lebih baik melalui transparansi dan partisipasi aktif seluruh warga desa.
+                        </p>
+<div class="flex gap-4">
+<a class="size-10 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-slate-600 hover:bg-primary hover:text-white transition-all" href="#">
+<span class="material-symbols-outlined text-xl">share</span>
+</a>
+<a class="size-10 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-slate-600 hover:bg-primary hover:text-white transition-all" href="#">
+<span class="material-symbols-outlined text-xl">public</span>
+</a>
+</div>
+</div>
+<div class="space-y-6">
+<h4 class="font-bold text-slate-900 dark:text-white">Tautan Cepat</h4>
+<ul class="space-y-4 text-sm text-slate-500 dark:text-slate-400 font-medium">
+<li><a class="hover:text-primary transition-colors" href="#">Tentang Kami</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Statistik Desa</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Berita Desa</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Galeri Kegiatan</a></li>
+</ul>
+</div>
+<div class="space-y-6">
+<h4 class="font-bold text-slate-900 dark:text-white">Bantuan</h4>
+<ul class="space-y-4 text-sm text-slate-500 dark:text-slate-400 font-medium">
+<li><a class="hover:text-primary transition-colors" href="#">Panduan Pengguna</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Kebijakan Privasi</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Syarat &amp; Ketentuan</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Hubungi Kami</a></li>
+</ul>
+</div>
+<div class="space-y-6">
+<h4 class="font-bold text-slate-900 dark:text-white">Kontak Desa</h4>
+<div class="space-y-4 text-sm text-slate-500 dark:text-slate-400">
+<div class="flex items-start gap-3">
+<span class="material-symbols-outlined text-primary">location_on</span>
+<p>Jl. Balai Desa No. 1, Kecamatan Sukamaju, Kabupaten Indramayu</p>
+</div>
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary">call</span>
+<p>(0234) 123456</p>
+</div>
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary">mail</span>
+<p>kontak@desa-sukamaju.go.id</p>
+</div>
+</div>
+</div>
+</div>
+<div class="border-t border-slate-100 dark:border-slate-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-slate-400">
+<p>© 2024 Pemerintah Desa Sukamaju. Dikelola oleh Tim Digital Desa.</p>
+<div class="flex gap-6">
+<a class="hover:text-primary" href="#">Facebook</a>
+<a class="hover:text-primary" href="#">Instagram</a>
+<a class="hover:text-primary" href="#">Twitter</a>
+</div>
+</div>
+</div>
+</footer>
+</div>
+</body></html>
